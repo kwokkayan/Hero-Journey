@@ -31,6 +31,7 @@ This section shall cover the features, catergorized by the **code requirement** 
 - Some mobs are spawned outside of the player's vision randomly.
 - Some boulders are placed randomly.
 - The boss can spawn objects in random positions.
+- Exits can be in random positions
 ### Data structures for storing game status
 - a Level Two dimensional array of characters to represent the level, where the origin (0, 0) is topleft of the level.
 - a Camera struct that stores the topleft position(x, y) and the camera's width and height.
@@ -52,3 +53,4 @@ This section shall cover the features, catergorized by the **code requirement** 
 - An object handler file that handles the object order
 - A draw menu file that draws the menu
 ### Others
+- Level editor and simplified level format 
