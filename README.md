@@ -46,6 +46,8 @@ This section shall cover the features, catergorized by the **code requirement** 
 - Loading levels.
 - Loading story.
 ### Program codes in multiple files
+- A object struct header that stores the data structures used
+- A misc file that stores miscellaneous functions, i.e. random number generator 
 - A level handler file that defines functions to update and manipulate the Level.
 - A camera handler file that updates the Camera struct according to player position.
 - A draw level file that draws the visible area according to the camera position.
