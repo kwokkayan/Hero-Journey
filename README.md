@@ -34,9 +34,10 @@ This section shall cover the features, catergorized by the **code requirement** 
 - Exits can be in random positions
 ### Data structures for storing game status
 - a Level Two dimensional array of characters to represent the level, where the origin (0, 0) is topleft of the level.
-- a Camera struct that stores the topleft position(x, y) and the camera's width and height.
-- a Player struct that stores the health, position, name of the player.
-- a MoveableThing struct that stores the health, position and ID of the mobs and obstacles.
+- a Camera class that stores the topleft position(x, y) and the camera's width and height.
+- a Object base class that stores the postion, id, and icon of any object. All objects are derived from it.
+- a Player class that stores the health, position, name of the player.
+- Classes for other mobs and special objects.
 - a TurnProcess array that stores the processing order of each object after every player move.
 ### Dynamic memory management
 - Since levels can be in different sizes, Level is loaded dynamically.
