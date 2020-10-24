@@ -11,7 +11,7 @@ Genre: role-playing and puzzle
 Set in a fictional world, the young Hero has been chosen to fight the Demon King, who has taken their father's life. Before embarking on his quest, the Elders entrusted the Hero with the Three Commandments:
 - First, do no harm.
 - Second, go right.
-- Third, kill the Demon King.
+- Third, kill the Demon King.\
 The Hero enters the Demon King's lair, confronted by Trial of the 4 Seasons, and must complete the trials to reach the Throne Room.
 ## Basic game rules
 - In the puzzles, the player must push around boulders and avoid obstacles to get to the exit. 
