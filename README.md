@@ -33,9 +33,9 @@ This section shall cover the features, catergorized by the **code requirement** 
 - The boss can spawn objects in random positions.
 - Exits can be in random positions
 ### Data structures for storing game status
-- a Level Two dimensional array of characters to represent the level, where the origin (0, 0) is topleft of the level.
-- a Camera class that stores the topleft position(x, y) and the camera's width and height.
 - a Object base class that stores the postion, id, and icon of any object. All objects are derived from it.
+- a Map class to represent the level, where the origin (0, 0) is topleft of the level.
+- a Camera class that stores the topleft position(x, y) and the camera's width and height.
 - a Player class that stores the health, position, name of the player.
 - Classes for other mobs and special objects.
 - a TurnProcess array that stores the processing order of each object after every player move.
@@ -47,7 +47,7 @@ This section shall cover the features, catergorized by the **code requirement** 
 - Loading levels.
 - Loading story.
 ### Program codes in multiple files
-- A object struct header that stores the data structures used
+- A object classes header that stores the data structures used
 - A misc file that stores miscellaneous functions, i.e. random number generator 
 - A level handler file that defines functions to update and manipulate the Level.
 - A camera handler file that updates the Camera struct according to player position.
