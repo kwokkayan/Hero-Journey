@@ -1,41 +1,46 @@
 #include <string>
 #ifndef THINGSCLASSES_H
 #define THINGSCLASSES_H
+  enum class ObjectId { //Stores all ids of objects, starting with 0
+    //all enums and const are capitalized
+    VOID,
+    PLAYER,
+    ROCK
+  };
+  enum class ObjectIcon { //Stores all icons (in ASCII character) of objects, mirrored with ObjectId
+    VOID = ' ',
+    PLAYER = '@',
+    ROCK = '#'
+  };
   class Point {
-    private:
-      int x, y;
     public:
+      int x, y;
       Point();
       Point(int px, int py);
-      int getX();
-      int getY();
       void changePos(int px, int py);
       int distanceTo(Point q); //Maybe return double
   };
   class Object { //Base Class for all objects
-    private:
-      int id; //special id
-      char icon; //ASCII value
-      Point pos;
     public:
+      ObjectId id; //special id
+      ObjectIcon icon; //ASCII value
+      Point pos;
       Object(); //create an empty object (the void)
       Object(int px, int py); //create an empth object at x, y
-      Object(int Id, char Icon, int px, int py);
-      int getId();
-      char getIcon();
+      Object(ObjectId Id, ObjectIcon Icon, int px, int py);
   };
   class Player : public Object { //The player
-    private:
+    public:
       int hp;
       std::string name;
-    public:
       Player();
-      Player(std::string name, int px, int py);
-      void movement();
+      Player(std::string n, int px, int py);
+      void movement(int dx, int dy);
   };
   class Rock : public Object {
     public:
-      Rock(int Id, char Icon, int px, int py);
+      Rock();
+      Rock(int px, int py);
       void moveRock(Point p);
   };
 #endif

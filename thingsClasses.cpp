@@ -7,8 +7,6 @@ Point::Point(int px, int py) {
   x = px;
   y = py;
 }
-int Point::getX() { return x; }
-int Point::getY() { return y; }
 void Point::changePos(int px, int py) {
   x = px;
   y = py;
@@ -18,25 +16,28 @@ int Point::distanceTo(Point p) {
 }
 
 Object::Object() {
-  id = 0;
-  icon = ' ';
+  id = ObjectId::VOID;
+  icon = ObjectIcon::VOID;
   pos = Point();
 }
 Object::Object(int px, int py) {
-  id = 0;
-  icon = ' ';
+  id = ObjectId::VOID;
+  icon = ObjectIcon::VOID;
   pos = Point(px, py);
 }
-Object::Object(int Id, char Icon, int px, int py){
+Object::Object(ObjectId Id, ObjectIcon Icon, int px, int py){
   id = Id;
   icon = Icon;
   pos = Point(px, py);
 }
-int Object::getId() { return id; }
-char Object::getIcon() { return icon; }
 
-Player::Player() {
+Player::Player(std::string n, int px, int py) : Object(ObjectId::PLAYER, ObjectIcon::PLAYER, px, py){
   hp = 3;
-  name = "Bob";
-  //TODO: future implementation
+  name = n;
 }
+void Player::movement(int dx, int dy) {
+  pos.x += dx;
+  pos.y += dy;
+}
+
+Rock::Rock(int px, int py) : Object(ObjectId::ROCK, ObjectIcon::ROCK, px, py) {}
