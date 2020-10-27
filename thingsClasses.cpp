@@ -41,3 +41,7 @@ void Player::movement(int dx, int dy) {
 }
 
 Rock::Rock(int px, int py) : Object(ObjectId::ROCK, ObjectIcon::ROCK, px, py) {}
+
+void Rock::moveRock(Point p) {
+  //request to map object to change pos. p is for detected where the force came from
+}
