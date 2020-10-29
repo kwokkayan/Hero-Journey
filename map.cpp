@@ -15,3 +15,26 @@ void Map::createEmptyMap(int w, int h) {
     }
   }
 }
+void Map::deleteMap() {
+  for (int i = 0; i < height; i++) {
+    delete[] mapPtr[i]; 
+  }
+  delete[] mapPtr;
+}
+
+void Map::insertObject(Object o, int px, int py) {
+  mapPtr[py][px] = o;
+}
+void Map::insertObject(Object o, Point p) {
+  mapPtr[p.y][p.x] = o;
+}
+
+Object Map::getObject(int px, int py) {
+  return mapPtr[py][px];
+}
+Object Map::getObject(Point p) {
+  return mapPtr[p.y][p.x];
+}
+
+int Map::getWidth() { return width; }
+int Map::getHeight() { return height; }

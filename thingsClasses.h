@@ -33,13 +33,11 @@
     public:
       int hp;
       std::string name;
-      Player();
       Player(std::string n, int px, int py);
       void movement(int dx, int dy);
   };
   class Rock : public Object {
     public:
-      Rock();
       Rock(int px, int py);
       void moveRock(Point p);
   };
