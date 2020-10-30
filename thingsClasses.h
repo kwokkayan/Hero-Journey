@@ -4,11 +4,17 @@
   enum class ObjectId { //Stores all ids of objects, starting with 0
     //all enums and const are capitalized
     VOID,
+    FLOOR,
+    TOPWALL,
+    SIDEWALL,
     PLAYER,
     ROCK
   };
   enum class ObjectIcon { //Stores all icons (in ASCII character) of objects, mirrored with ObjectId
     VOID = ' ',
+    FLOOR = '.',
+    TOPWALL = '=',
+    SIDEWALL = '|',
     PLAYER = '@',
     ROCK = '#'
   };
