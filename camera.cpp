@@ -1,5 +1,12 @@
+// This handles the camera and prints the map
+//
+//
+//
 #include <iostream>
+
 #include "camera.h"
+#include "colorIO.h"
+
 Camera::Camera() {
   length = 0;
   camera_pos = Point(0, 0);
@@ -21,11 +28,11 @@ void Camera::draw(Map m) {
     for (int j = camera_topleft.x; j < camera_topleft.x + length; j++) {
       //TODO: DONT USE ENUMS
       //THEY ARE HORRIBLE
-      //std::cout << i << ' ' << j << std::endl;
+      //std::cout << j << ' ' << i << std::endl;
       if ((i < 0 || i >= m.getHeight()) || (j < 0 || j >= m.getWidth()))
-        std::cout << static_cast<char>(ObjectIcon::VOID); //ENUM CASTING
-      else
-        std::cout << static_cast<char>(m.getObject(j, i).icon);
+        std::cout << addBGColor(BGCode::BLACK) << static_cast<char>(ObjectIcon::VOID) << reset(); //ENUM CASTING
+      else //PRINTING MAP OBJECTS
+        m.getObject(j, i)->draw();
     }
     std::cout << "~\n";
   }

@@ -1,21 +1,13 @@
-FLAGS = -std=c++11 -pedantic-errors
-OBJECTCODES = testmain.o thingsClasses.o map.o camera.o objectStack.o gameFunctions.o
+CC = g++
+CPPFLAGS = -std=c++11 -pedantic-errors
 TARGET = testmain
-gameFunctions.o: gameFunctions.cpp gameFunctions.h
-	g++ $(FLAGS) -c $<
-thingsClasses.o: thingsClasses.cpp thingsClasses.h
-	g++ $(FLAGS) -c $<
-objectStack.o: objectStack.cpp objectStack.h
-	g++ $(FLAGS) -c $<
-map.o: map.cpp map.h
-	g++ $(FLAGS) -c $<
-camera.o: camera.cpp camera.h
-	g++ $(FLAGS) -c $<
-testmain.o: testmain.cpp
-	g++ $(FLAGS) -c $<
+OBJECTCODES = baseClasses.o openable.o camera.o colorIO.o door.o void.o wall.o floor.o gameFunctions.o map.o objectStack.o player.o pressurePlate.o rock.o testmain.o
+%.o: %.cpp
+	$(CC) $(CPPFLAGS) -c $<
 $(TARGET): $(OBJECTCODES)
-	g++ $(FLAGS) $(OBJECTCODES) -o $@
+	$(CC) $(CPPFLAGS) $(OBJECTCODES) -o $@
 clean:
 	rm $(OBJECTCODES) $(TARGET)
-all: $(OBJECTCODES) $(TARGET)
+all:
+	$(TARGET)
 .PHONY: clean all

@@ -1,21 +1,25 @@
 #include <iostream>
 #include <cstdlib>
+
 #include "gameFunctions.h"
+
 char game_func::getKeystroke() {
   char in;
+  std::cout << "You inputted: ";
   std::system("stty raw");
   std::cin >> in;
   std::system("stty cooked");
+  std::cout << '\n';
   return in;
 }
-void game_func::movePlayerAndCamera(Map &m, Camera &c, Player &p, Point pos) {
-  m.insertObject(m.removeObject(p.pos.x, p.pos.y), pos.x, pos.y);
-  p.pos.changePos(pos.x, pos.y);
-  c.camera_pos.changePos(pos.x, pos.y); //Change player and camera pos
+void game_func::movePlayerAndCamera(Map m, Camera *c, Player *p, Point pos) {
+  m.insertObject(m.removeObject(p->pos), pos);
+  p->pos.changePos(pos.x, pos.y);
+  c->camera_pos.changePos(pos.x, pos.y); //Change player and camera pos
 }
-int game_func::detectGameControls(Map &m, Camera &c, Player &p) {
+Point game_func::detectGameControls(Player *p) {
   char input = game_func::getKeystroke();
-  Point pos = p.pos;
+  Point pos = p->pos;
   switch (input) {
     case 'W':
     case 'w': {
@@ -39,29 +43,49 @@ int game_func::detectGameControls(Map &m, Camera &c, Player &p) {
     }
     case 'Q':
     case 'q':
-      return -1;
+      return Point();
     default:
-      return -2; //return -1 for illegal input
+      return Point(-2, -2); //return -1 for illegal input
   }
-  std::cout << pos.x << " " << pos.y << "\n";
-  switch (m.getObject(pos.x, pos.y).id) {
+  return pos;
+}
+int game_func::processControls(Point pos, Map map, Camera *camera, Player *player) {
+  if (pos.equalsTo(-1, -1))
+    return -1;
+  else if (pos.equalsTo(-2, -2))
+    return -2;
+
+  if (player->check(pos, map)) {
+      map.updateMap(); //change
+      camera->camera_pos = player->pos; //CHANGE THIS
+  }
+  /* switch (m.getObject(pos)->id) {
+    //main checking condition... may need refactoring
     case ObjectId::FLOOR: {
       game_func::movePlayerAndCamera(m, c, p, pos);
       break;
     }
     case ObjectId::ROCK: {
-      Point push_destination = Point(2 * pos.x - p.pos.x, 2 * pos.y - p.pos.y);
-      if (m.getObject(push_destination.x, push_destination.y).id == ObjectId::FLOOR) {
-        m.insertObject(m.removeObject(pos.x, pos.y), push_destination.x, push_destination.y);
-        game_func::movePlayerAndCamera(m, c, p, pos);
+      Point push_destination = Point(2 * pos.x - p->pos.x, 2 * pos.y - p->pos.y);
+      Object *o = m.getObject(push_destination);
+      switch (o->id) { //check destination
+        case ObjectId::FLOOR: {
+          m.insertObject(m.removeObject(pos), push_destination);
+          game_func::movePlayerAndCamera(m, c, p, pos);
+          break;
+        }
+        case ObjectId::PRESSUREPLATE: {
+          PressurePlate *pp = static_cast<PressurePlate*>(o);
+          pp->activate();
+        }
       }
       break;
     }
     default:
       return -3; //return -2 for no movement
-  }
+  } */
 
-
+  std::cout << player->pos.x << " " << player->pos.y << "\n";
 
   return 0;
 }
