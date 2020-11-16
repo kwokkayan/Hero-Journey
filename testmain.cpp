@@ -12,16 +12,21 @@
 #include "camera.h"
 #include "zombie.h"
 #include "snake.h"
+#include "winTile.h"
+#include "infoTile.h"
 #include "gameFunctions.h"
 
 int main() {
   Map map = Map();
   //Always remember to create an empty map before inserting objects!
-  map.createEmptyMap(100, 100, 3);
+  map.createEmptyMap(20, 20, 3);
 
   Player *player = new Player("Derek", 2, 4);
-  Camera *camera = new Camera(20, player->pos);
-
+  Camera *camera = new Camera(18, player->pos);
+  
+  //NEW: wintile and infotile
+  WinTile *wintile = new WinTile(10, 6);
+  InfoTile *infotile = new InfoTile("sample text/sample.txt", 10, 8);
 
   Rock *rock = new Rock(10, 1);
   Rock *rockk = new Rock(9, 2);
@@ -42,7 +47,7 @@ int main() {
   std::vector<Moveable*> mobQueue;
   Snake *s = nullptr;
   for (int j = 0; j < 1; j++) {
-    for (int i = 1; i <= 5; i++) {
+    for (int i = 1; i <= 2; i++) {
       s = new Snake(player, i, 10 + j);
       mobQueue.push_back(s);
       map.insertObject(s);
@@ -54,6 +59,9 @@ int main() {
 
   // Don't forget to insert the declared objects!
   map.insertObject(player);
+  map.insertObject(wintile);
+  map.insertObject(infotile);
+
   map.insertObject(rock);
   map.insertObject(rockk);
   map.insertObject(rockkk);
@@ -64,5 +72,5 @@ int main() {
 
   // Pass through the initialised map, mobQueue, player and camera
   // To start the game
-  game_func::gameLoop(map, mobQueue, player, camera);
+  game_func::gameLoop(map, wintile, mobQueue, player, camera);
 }
