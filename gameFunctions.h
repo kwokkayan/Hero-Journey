@@ -17,6 +17,9 @@
 #include "zombie.h"
 #include "rock.h"
 #include "wall.h"
+#include "snake.h"
+#include "winTile.h"
+#include "infoTile.h"
 
 #ifndef GAMEFUNCTIONS_H
 #define GAMEFUNCTIONS_H

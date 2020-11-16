@@ -110,6 +110,29 @@ void game_func::readLevel(std::string levelFile, Map &map, std::vector<Moveable*
       mobQueue.push_back(z);
       map.insertObject(z);
     }
+    else if (objectType == "snake") {
+      int px, py;
+      fin >> px >> py;
+      Snake *s = new Snake(p, px, py);
+      std::cout << "Snake created\n";
+      mobQueue.push_back(s);
+      map.insertObject(s);
+    }
+    else if (objectType == "wintile") {
+      int px, py;
+      fin >> px >> py;
+      WinTile *wintile = new WinTile(px, py);
+      std::cout << "WinTile created\n";
+      map.insertObject(wintile);
+    }
+    else if (objectType == "infotile") {
+      std::string address;
+      int px, py;
+      fin >> address >> px >> py;
+      InfoTile *infotile = new InfoTile(address, px, py);
+      std::cout << "InfoTile created\n";
+      map.insertObject(infotile);
+    }
   }
   std::cout << "Finished reading objects\n";
 }
