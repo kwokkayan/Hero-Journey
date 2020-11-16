@@ -39,14 +39,15 @@ void Zombie::move(Map m) {
 
   if (!p.equalsTo(pos))
     if (this->check(p, m))
-      this->process(p);
+      pos = p;
 }
 void Zombie::dealDmg(Moveable *p) {
   if (pos.distanceTo(p->pos) == 1)
     p->takeDmg();
 }
 void Zombie::process(Point p) {
-  pos = p;
+  //Kill zom
+  destroyFlag = true;
 }
 bool Zombie::check(Point p, Map m) {
   if (!((p.x >= 0 || p.x <= m.getWidth()) && (p.y >= 0 || p.y <= m.getHeight())))

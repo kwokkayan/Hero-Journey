@@ -15,6 +15,7 @@ namespace game_func {
   char getKeystroke();
   Point detectGameControls(Player *p);
   void drawUI(Player* p);
+  void printLoseScreen();
   void gameLoop(Map m, std::vector<Moveable*> mobQueue, Player *player, Camera *camera);
 }
 #endif

@@ -15,15 +15,12 @@ void Door::process(Point p) {
   //empty
 }
 bool Door::check(Object* o) {
+  if (activatorObj == nullptr) //mobs can open doors :(
+    this->open();
   return false;
 }
 bool Door::isValid() {
-  if (isOpened)
-    return true;
-  if (activatorObj == nullptr)
-    this->open();
-    //else stuff idk
-  return false;
+  return isOpened;
 }
 void Door::draw() {
   if (isOpened)

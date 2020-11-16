@@ -22,5 +22,6 @@
 
       void printName();
       void printHP();
+      void printXY();
   };
 #endif

@@ -5,6 +5,7 @@
 // *********************************
 // TODO: REFACTOR THE CODE ARRRRRRRR
 // *********************************
+#include <vector>
 
 #ifndef BASECLASSES_H
 #define BASECLASSES_H
@@ -19,7 +20,8 @@
     ROCK,
     PRESSUREPLATE,
     DOOR,
-    ZOMBIE
+    ZOMBIE,
+    SNAKE
   };
   // ObjectIcon stores all icons (in ASCII character) of objects, mirrored with ObjectId
   enum class ObjectIcon {
@@ -31,7 +33,8 @@
     ROCK = '#',
     PRESSUREPLATE = '*',
     DOOR = '+',
-    ZOMBIE = 'Z'
+    ZOMBIE = 'Z',
+    SNAKE = 'S'
   };
   // Point stores the Cartesian coordinates of all objects
   // and functions that manipulate them
@@ -42,6 +45,7 @@
       Point(int px, int py);
       void changePos(int px, int py);
       int distanceTo(Point p); //Maybe return double
+      std::vector<Point> closestPointsTo(Point p, int vd);
       bool equalsTo(Point p);
       bool equalsTo(int px, int py);
   };

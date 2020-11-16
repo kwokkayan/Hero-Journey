@@ -1,11 +1,12 @@
 #include "moveable.h"
 #include "map.h"
+
 #ifndef ZOMBIE_H
 #define ZOMBIE_H
   class Zombie : public Moveable {
     public:
       Zombie(int px, int py);
-      ~Zombie();
+      ~Zombie(); //dunno why this doesn't work
       void move(Map m);
       void dealDmg(Moveable *m);
 
