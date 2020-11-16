@@ -1,0 +1,6 @@
+player Derek 2 4
+camera 10
+rock 2 3
+door 5 5
+pressureplate 3 3
+zombie 10 10
