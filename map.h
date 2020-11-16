@@ -11,7 +11,7 @@
         Map();
         void createEmptyMap(int w, int h, int depth);
         void deleteMap();
-        void updateMap();
+        void updateMap(Point center, int w);
 
         void insertObject(Object *o);
         void insertObject(Object *o, Point p);

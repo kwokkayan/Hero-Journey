@@ -1,18 +1,26 @@
 #include <string>
 
-#include "baseClasses.h"
+
+#include "moveable.h"
 #include "map.h"
 
 #ifndef PLAYER_H
 #define PLAYER_H
-  class Player : public Object { //The player
+  class Player : public Moveable { //The player
     public:
       int hp;
+      bool justTookDmg;
       std::string name;
       Player(std::string n, int px, int py);
-      void movement(int dx, int dy);
+
+      void takeDmg();
+
       void process(Point p);
       bool check(Point p, Map m);
+      bool isValid();
       void draw();
+
+      void printName();
+      void printHP();
   };
 #endif

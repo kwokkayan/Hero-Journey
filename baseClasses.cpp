@@ -2,6 +2,7 @@
 // Description: Program that tests the classes and functions
 // Last Changed: 5 Nov, 2020
 #include <iostream>
+#include <cmath>
 
 #include "baseClasses.h"
 #include "colorIO.h"
@@ -19,7 +20,12 @@ void Point::changePos(int px, int py) {
   y = py;
 }
 int Point::distanceTo(Point p) {
-    //TODO: IMPLEMENT THIS FOR PATHFINDING
+  if (p.x == x && p.y == y)
+    return 0;
+  else if (p.x == x || p.y == y)
+    return abs(p.x - x) + abs(p.y - y);
+  else
+    return abs(p.x - x) + abs(p.y - y) + 1;
 }
 bool Point::equalsTo(Point p) {
   return (x == p.x && y == p.y);

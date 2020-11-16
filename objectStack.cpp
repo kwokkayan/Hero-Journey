@@ -16,9 +16,9 @@ ObjectStack::ObjectStack(int d) {
   }
 }
 void ObjectStack::push(Object *o) {
-  std::cout << o << "\n";
+  //std::cout << o << "\n";
   stack[index--] = o;
-  std::cout << "object icon: " << static_cast<char>(stack[index+1]->icon) << "\n";
+  //std::cout << "object icon: " << static_cast<char>(stack[index+1]->icon) << "\n";
 }
 Object* ObjectStack::pop() {
   Object* temp = stack[index + 1];

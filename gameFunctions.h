@@ -1,17 +1,20 @@
 //#include "baseClasses.h"
+#include <vector>
+
 #include "map.h"
 #include "camera.h"
 #include "player.h"
 #include "pressurePlate.h"
 #include "rock.h"
 #include "door.h"
+#include "moveable.h"
 
 #ifndef GAMEFUNCTIONS_H
 #define GAMEFUNCTIONS_H
 namespace game_func {
   char getKeystroke();
   Point detectGameControls(Player *p);
-  int processControls(Point pos, Map m, Camera *c, Player *p);
-  void movePlayerAndCamera(Map m, Camera *c, Player *p, Point pos);
+  void drawUI(Player* p);
+  void gameLoop(Map m, std::vector<Moveable*> mobQueue, Player *player, Camera *camera);
 }
 #endif

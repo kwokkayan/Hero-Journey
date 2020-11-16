@@ -28,7 +28,6 @@ void Camera::draw(Map m) {
     for (int j = camera_topleft.x; j < camera_topleft.x + length; j++) {
       //TODO: DONT USE ENUMS
       //THEY ARE HORRIBLE
-      //std::cout << j << ' ' << i << std::endl;
       if ((i < 0 || i >= m.getHeight()) || (j < 0 || j >= m.getWidth()))
         std::cout << addBGColor(BGCode::BLACK) << static_cast<char>(ObjectIcon::VOID) << reset(); //ENUM CASTING
       else //PRINTING MAP OBJECTS

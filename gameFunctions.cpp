@@ -9,13 +9,8 @@ char game_func::getKeystroke() {
   std::system("stty raw");
   std::cin >> in;
   std::system("stty cooked");
-  std::cout << '\n';
+  std::cout << "\n\n\n\n\n\n\n\n\n\n";
   return in;
-}
-void game_func::movePlayerAndCamera(Map m, Camera *c, Player *p, Point pos) {
-  m.insertObject(m.removeObject(p->pos), pos);
-  p->pos.changePos(pos.x, pos.y);
-  c->camera_pos.changePos(pos.x, pos.y); //Change player and camera pos
 }
 Point game_func::detectGameControls(Player *p) {
   char input = game_func::getKeystroke();
@@ -49,43 +44,29 @@ Point game_func::detectGameControls(Player *p) {
   }
   return pos;
 }
-int game_func::processControls(Point pos, Map map, Camera *camera, Player *player) {
-  if (pos.equalsTo(-1, -1))
-    return -1;
-  else if (pos.equalsTo(-2, -2))
-    return -2;
+void game_func::drawUI(Player* player) {
+  player->printName();
+  player->printHP();
+}
+void game_func::gameLoop(Map map, std::vector<Moveable*> mobQueue, Player *player, Camera *camera) {
+  Point newP = Point();
+  while (true) {
+    game_func::drawUI(player);
+    camera->draw(map);
 
-  if (player->check(pos, map)) {
-      map.updateMap(); //change
+    newP = game_func::detectGameControls(player);
+    if (newP.equalsTo(-1, -1))
+      break;
+
+    if (!newP.equalsTo(-2, -2) && player->check(newP, map)) {
       camera->camera_pos = player->pos; //CHANGE THIS
+      map.updateMap(player->pos, 4);
+    }
+
+    for (std::vector<Moveable*>::iterator it = mobQueue.begin(); it != mobQueue.end(); it++) {
+      (*it)->move(map);
+      (*it)->dealDmg(player);
+      map.updateMap((*it)->pos, 3);
+    }
   }
-  /* switch (m.getObject(pos)->id) {
-    //main checking condition... may need refactoring
-    case ObjectId::FLOOR: {
-      game_func::movePlayerAndCamera(m, c, p, pos);
-      break;
-    }
-    case ObjectId::ROCK: {
-      Point push_destination = Point(2 * pos.x - p->pos.x, 2 * pos.y - p->pos.y);
-      Object *o = m.getObject(push_destination);
-      switch (o->id) { //check destination
-        case ObjectId::FLOOR: {
-          m.insertObject(m.removeObject(pos), push_destination);
-          game_func::movePlayerAndCamera(m, c, p, pos);
-          break;
-        }
-        case ObjectId::PRESSUREPLATE: {
-          PressurePlate *pp = static_cast<PressurePlate*>(o);
-          pp->activate();
-        }
-      }
-      break;
-    }
-    default:
-      return -3; //return -2 for no movement
-  } */
-
-  std::cout << player->pos.x << " " << player->pos.y << "\n";
-
-  return 0;
 }

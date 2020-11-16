@@ -18,7 +18,8 @@
     PLAYER,
     ROCK,
     PRESSUREPLATE,
-    DOOR
+    DOOR,
+    ZOMBIE
   };
   // ObjectIcon stores all icons (in ASCII character) of objects, mirrored with ObjectId
   enum class ObjectIcon {
@@ -29,7 +30,8 @@
     PLAYER = '@',
     ROCK = '#',
     PRESSUREPLATE = '*',
-    DOOR = '+'
+    DOOR = '+',
+    ZOMBIE = 'Z'
   };
   // Point stores the Cartesian coordinates of all objects
   // and functions that manipulate them

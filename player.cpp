@@ -4,13 +4,14 @@
 #include "colorIO.h"
 #include "void.h"
 
-Player::Player(std::string n, int px, int py) : Object(ObjectId::PLAYER, ObjectIcon::PLAYER, px, py) {
+Player::Player(std::string n, int px, int py) : Moveable(ObjectId::PLAYER, ObjectIcon::PLAYER, px, py) {
   hp = 3;
   name = n;
+  justTookDmg = false;
 }
-void Player::movement(int dx, int dy) {
-  pos.x += dx;
-  pos.y += dy;
+void Player::takeDmg() {
+  --hp;
+  justTookDmg = true;
 }
 void Player::process(Point p) {
   pos = p;
@@ -21,7 +22,6 @@ bool Player::check(Point p, Map m) {
 
   Object *nextObject = m.getObject(p);
   if (nextObject->isValid()) { //if valid spot then gogogo
-    std::cout << "validdesu\n";
     nextObject->process(p);
     this->process(p);
     return true;
@@ -30,9 +30,7 @@ bool Player::check(Point p, Map m) {
   }
 
   Point nextP = Point(2 * p.x - pos.x, 2 * p.y - pos.y);
-  std::cout << "nextP = " << nextP.x << " " << nextP.y << '\n';
   if ((nextP.x >= 0 && nextP.x < m.getWidth()) && (nextP.y >= 0 && nextP.y < m.getHeight())) {
-    std::cout << "nextP is valid\n";
     Object *nextnextObject = m.getObject(nextP);
 
     if (nextObject->check(nextnextObject)) {
@@ -45,6 +43,24 @@ bool Player::check(Point p, Map m) {
   return false;
   //return m.getObject(p)->check(nextP, m);
 }
+bool Player::isValid() { //Take damage
+  this->takeDmg();
+  return false;
+}
 void Player::draw() {
-  std::cout << addFGColor(FGCode::CYAN) << static_cast<char>(icon) << reset();
+  if (justTookDmg) {
+    std::cout << addFGColor(FGCode::RED) << static_cast<char>(icon) << reset();
+    justTookDmg = false;
+  } else {
+    std::cout << addFGColor(FGCode::CYAN) << static_cast<char>(icon) << reset();
+  }
+}
+void Player::printName() {
+  std::cout << "Your name: " << name << '\n' << reset();
+}
+void Player::printHP() {
+  std::cout << "Your HP: " << hp << '\n' << reset();
+  if (justTookDmg) {
+    std::cout << addFGColor(FGCode::RED) << "You just took damage!" << reset() << '\n';
+  }
 }
