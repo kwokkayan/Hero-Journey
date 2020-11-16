@@ -8,7 +8,6 @@
 #include "camera.h"
 #include "zombie.h"
 #include "gameFunctions.h"
-#include "levelObject.h"
 
 
 int main() {
@@ -16,13 +15,11 @@ int main() {
   std::vector<Moveable*> mobQueue;
 
   Map map = Map();
-  map.createEmptyMap(100, 100, 5);
+  map.createEmptyMap(10, 10, 5);
 
-  Player *player = NULL;
-  Camera *camera = NULL;
+  Player *player = nullptr;
+  Camera *camera = nullptr;
 
-
-  levelObject(levelFile, map, mobQueue, player, camera);
+  game_func::readLevel(levelFile, map, mobQueue, player, camera);
   game_func::gameLoop(map, mobQueue, player, camera);
-
 }

@@ -39,15 +39,15 @@ void Map::updateMap(Point center, int w) {
   for (int i = center.y - w; i < center.y + w; i++) {
     if (i < 0)
       continue;
-    if (i > height)
+    if (i >= height)
       break;
 
     for (int j = center.x - w; j < center.x + w; j++) {
       if (j < 0)
         continue;
-      if (j > width)
+      if (j >= width)
         break;
-
+        
       Point currPos = Point(j, i);
       Object *currObj = this->getObject(currPos); //so inefficient :(
 
