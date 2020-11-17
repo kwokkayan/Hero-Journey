@@ -15,14 +15,21 @@ ObjectStack::ObjectStack(int d) {
     stack[i] = new Object();
   }
 }
+void ObjectStack::deleteStack() {
+  for (int i = 0; i < depth; i++) {
+    std::cout << "freeing object " << static_cast<char>(stack[i]->icon) << '\n';
+    delete stack[i];
+  }
+  delete[] stack;
+}
 void ObjectStack::push(Object *o) {
   //std::cout << o << "\n";
   stack[index--] = o;
   //std::cout << "object icon: " << static_cast<char>(stack[index+1]->icon) << "\n";
 }
 Object* ObjectStack::pop() {
-  Object* temp = stack[index + 1];
-  stack[index++] = new Object();
+  Object* temp = stack[++index];
+  stack[index] = new Object();
   return temp;
 }
 Object* ObjectStack::top() {

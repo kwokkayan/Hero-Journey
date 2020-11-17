@@ -4,6 +4,8 @@
 #include <cstdlib>
 #include <fstream>
 #include <sstream>
+#include <iomanip>
+#include <string>
 
 #include "baseClasses.h"
 #include "colorIO.h"
@@ -28,14 +30,27 @@
 #ifndef GAMEFUNCTIONS_H
 #define GAMEFUNCTIONS_H
 namespace game_func {
+  enum class menuFuncions {
+    RESTART,
+    SAVE,
+    LOAD,
+    LEAVEGAME,
+    LEAVEMENU
+  };
   char getKeystroke();
-  Point detectGameControls(Player *p);
+  void setFormat(int w);
+  void detectGameControls(Player *p, Point &pos);
   void clrScr(int t);
   void drawUI(Player* p); //IOMANIP
+  void drawMenu(std::string address); //all are in menu dir
+  void selectSave(int &sel);
+  void drawSaveMenu(std::vector<int> &existingSavesId);
+  void drawLoadMenu(std::vector<int> &existingSavesId);
+  void menuLoop(game_func::menuFuncions &f);
   void printLoseScreen(); //IOMANIP
   void printWinScreen();  //IOMANIP
   void readLevel(std::string levelFile, Map &map, std::vector<Moveable*> &mobQueue, Player *&p, Camera *&c);
-  void gameLoop(Map m, WinTile *wintile, std::vector<Moveable*> mobQueue, Player *player, Camera *camera);
+  void gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&player, Camera *&camera);
 
   void save(std::string address, Map map, Camera *c);
   void load(std::string address, Map &map, WinTile *&win, std::vector<Moveable*> &mobQueue, Player *&p, Camera *&c);

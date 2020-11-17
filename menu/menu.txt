@@ -1,0 +1,7 @@
+30 6
+Menu
+R: Restart Level
+S: Save Game
+L: Load Game
+Q: Leave Game
+H: Leave Menu

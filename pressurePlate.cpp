@@ -21,6 +21,7 @@ void PressurePlate::activate() {
 }
 void PressurePlate::deactivate() {
   isPressed = false;
+  std::cout << activateObj;
   if (activateObj != nullptr) {
     activateObj->close();
   }

@@ -2,16 +2,18 @@
 
 char game_func::getKeystroke() {
   char in;
-  std::cout << "You inputted: ";
   std::system("stty raw");
   std::cin >> in;
   std::system("stty cooked");
-  //std::cout << "\n\n\n\n\n\n\n\n\n\n";
+  std::cout << '\n';
   return in;
 }
-Point game_func::detectGameControls(Player *p) {
+void game_func::setFormat(int w) {
+  std::cout << std::right << std::setw(w);
+}
+void game_func::detectGameControls(Player *p, Point &pos) {
   char input = game_func::getKeystroke();
-  Point pos = p->pos;
+  pos = p->pos;
   switch (input) {
     case 'W':
     case 'w': {
@@ -33,13 +35,14 @@ Point game_func::detectGameControls(Player *p) {
       ++pos.x;
       break;
     }
-    case 'Q':
-    case 'q':
-      return Point();
+    case 'H':
+    case 'h': {
+      pos = Point(-2, -2);
+      break;
+    }
     default:
-      return Point(-2, -2); //return -1 for illegal input
+      pos = Point(); //return -1 for illegal input
   }
-  return pos;
 }
 void game_func::clrScr(int t) {
   for (int i = 0; i < t; i++) {
@@ -50,6 +53,124 @@ void game_func::drawUI(Player* player) {
   player->printName();
   player->printHP();
   player->printXY();
+}
+void game_func::drawMenu(std::string address) { //draws menu
+  int width, height;
+  std::ifstream inFile(address);
+  if (inFile.is_open()) {
+    inFile >> width >> height;
+    std::string s;
+    getline(inFile, s);
+    game_func::clrScr(20);
+
+    game_func::setFormat(width);
+    for (int k = 0; k < width + 2; k++)
+      std::cout << '~';
+    std::cout << '\n';
+
+    for (int i = 0; i < height; i++) {
+
+      getline(inFile, s);
+      int bufferleft = (width - s.length()) / 2;
+      game_func::setFormat(width);
+
+      std::cout << '~';
+      for (int j = 0; j < bufferleft; j++) {
+        std::cout << ' ';
+      }
+      std::cout << s;
+      for (int j = 0; j < width - s.length() - bufferleft; j++) {
+        std::cout << ' ';
+      }
+      std::cout << "~\n";
+
+    }
+
+    game_func::setFormat(width);
+    for (int k = 0; k < width + 2; k++)
+      std::cout << '~';
+    std::cout << '\n';
+  } else std::cout << "Menu not found!\n";
+  inFile.close();
+}
+void game_func::drawSaveMenu(std::vector<int> &existingSavesId) {
+  std::string menuAddress = "menu/saveMenu.txt";
+  std::string saveDir = "saves/";
+  std::ofstream outFile(menuAddress);
+  if (outFile.is_open()) {
+    outFile << 30 << ' ' << 11 << '\n';
+    outFile << "Save Menu\n";
+    for (int i = 0; i < 10; i++) {
+      std::ifstream temp(saveDir + "save" + std::to_string(i) + ".txt");
+      outFile << i << ": ";
+      if (temp.good()) {
+        outFile << "exists!\n";//change to time stamp?
+        existingSavesId.push_back(i);
+      } else {
+        outFile << "empty!\n";
+      }
+      temp.close();
+    }
+  }
+  outFile.close();
+  game_func::drawMenu(menuAddress);
+}
+void game_func::drawLoadMenu(std::vector<int> &existingSavesId) {
+  std::string menuAddress = "menu/loadMenu.txt";
+  std::string saveDir = "saves/";
+  std::ofstream outFile(menuAddress);
+  if (outFile.is_open()) {
+    outFile << 30 << ' ' << 11 << '\n';
+    outFile << "Load Menu\n";
+    for (int i = 0; i < 10; i++) {
+      std::ifstream temp(saveDir + "save" + std::to_string(i) + ".txt");
+      if (temp.good()) {
+        outFile << i << ": ";
+        outFile << "exists!\n";//change to time stamp?
+        existingSavesId.push_back(i);
+      }
+      temp.close();
+    }
+  }
+  outFile.close();
+  game_func::drawMenu(menuAddress);
+}
+void game_func::menuLoop(game_func::menuFuncions &f) {
+  char input = ' ';
+  bool hasChosen = false;
+  while (!hasChosen) {
+    input = game_func::getKeystroke();
+    hasChosen = true;
+    switch (input) {
+      case 'R':
+      case 'r': {
+        f = game_func::menuFuncions::RESTART;
+        break;
+      }
+      case 'S':
+      case 's': {
+        f = game_func::menuFuncions::SAVE;
+        break;
+      }
+      case 'L':
+      case 'l': {
+        f = game_func::menuFuncions::LOAD;
+        break;
+      }
+      case 'Q':
+      case 'q': {
+        f = game_func::menuFuncions::LEAVEGAME;
+        break;
+      }
+      case 'H':
+      case 'h': {
+        f = game_func::menuFuncions::LEAVEMENU;
+        break;
+      }
+      default:
+        hasChosen = false;
+    }
+  }
 }
 void game_func::printLoseScreen() {
   std::cout << "You have died! :(\n";
@@ -144,8 +265,12 @@ void game_func::readLevel(std::string levelFile, Map &map, std::vector<Moveable*
   }
   std::cout << "Finished reading objects\n";
 }
-void game_func::gameLoop(Map map, WinTile *wintile, std::vector<Moveable*> mobQueue, Player *player, Camera *camera) {
+void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&player, Camera *&camera) {
   Point newP = Point();
+  //initial load here
+  bool hasQuitted = false;
+  bool noUpdate = false;
+
   while (true) {
     game_func::drawUI(player);
     camera->draw(map);
@@ -159,11 +284,71 @@ void game_func::gameLoop(Map map, WinTile *wintile, std::vector<Moveable*> mobQu
       break;
     }
 
-    newP = game_func::detectGameControls(player);
-    if (newP.equalsTo(-1, -1))
-      break;
+    game_func::detectGameControls(player, newP); //change to pass by reference
+    std::cout << newP.x << ' ' << newP.y << '\n';
+    if (newP.equalsTo(-2, -2)) { //open menu
+      game_func::drawMenu("menu/menu.txt");
+      game_func::menuFuncions selection;
+      game_func::menuLoop(selection);
+      switch (selection) {
+        case game_func::menuFuncions::RESTART: {
+          std::string n;
+          std::cout << "Nothing yet! :(";
+          char c = getKeystroke();
+          break;
+        }
+        case game_func::menuFuncions::SAVE: {
+          game_func::setFormat(40);
+          std::string address;
+          std::vector<int> existingSavesId;
+          game_func::drawSaveMenu(existingSavesId);
 
-    if (!newP.equalsTo(-2, -2) && player->check(newP, map)) {
+          //std::cout << "Please input savefile name (if exists it will be overwritten!): ";
+          //std::cin >> address;
+          int sel;
+          
+          game_func::save("saves/" + address, map, camera);
+          game_func::setFormat(40);
+
+          std::cout << "Save completed! Press any key to continue...";
+          char c = getKeystroke();
+          break;
+        }
+        case game_func::menuFuncions::LOAD: {
+          game_func::setFormat(40);
+          std::string address;
+          std::vector<int> existingSavesId;
+          game_func::drawLoadMenu(existingSavesId);
+
+          std::cout << "Please input loadfile name: ";
+          std::cin >> address;
+          map.deleteMap();
+          std::cout << "map deleted\n";
+          mobQueue.clear();
+          std::cout << "mobQueue deleted\n";
+          delete camera;
+          std::cout << "camera deleted\n";
+          std::cout << "all Objects deleted! \n";
+          game_func::load("saves/" + address, map, wintile, mobQueue, player, camera);
+
+          std::cout << "Load completed! Press any key to continue...";
+          char c = getKeystroke();
+          break;
+        }
+        case game_func::menuFuncions::LEAVEGAME: {
+          hasQuitted = true;
+          break;
+        }
+        case game_func::menuFuncions::LEAVEMENU: {
+          break;
+        }
+      }
+      if (hasQuitted)
+        break;
+      continue;
+    }
+
+    if (!newP.equalsTo(-1, -1) && player->check(newP, map)) {
       camera->camera_pos = player->pos; //CHANGE THIS
       map.updateMap(player->pos, 3);
     }
@@ -284,7 +469,7 @@ void game_func::save(std::string address, Map map, Camera *c) {
 }
 void game_func::load(std::string address, Map &map, WinTile *&win, std::vector<Moveable*> &mobQueue, Player *&p, Camera *&c) {
   std::ifstream inFile(address);
-
+  std::cout << "hi\n";
   p = new Player("empty", 0, 0); //so ugly :(
 
   if (inFile.is_open()) {
@@ -349,7 +534,12 @@ void game_func::load(std::string address, Map &map, WinTile *&win, std::vector<M
               if (activate.equalsTo(-1, -1) || (activate.y > i || (activate.y == i && activate.x > j))) {
                 pp->activateObj = nullptr;
               } else {
-                Openable *op = static_cast<Openable*>(map.getObject(activate));
+                Openable *op = dynamic_cast<Openable*>(map.getObject(activate));
+                if (op == nullptr) {
+                  Object *topObj = map.removeObject(activate);
+                  op = static_cast<Openable*>(map.getObject(activate));
+                  map.insertObject(topObj);
+                }
                 pp->activateObj = op;
                 op->activatorObj = pp;
               }
@@ -364,7 +554,13 @@ void game_func::load(std::string address, Map &map, WinTile *&win, std::vector<M
               if (activator.equalsTo(-1, -1) || (activator.y > i || (activator.y == i && activator.x > j))) {
                 d->activatorObj = nullptr;
               } else {
-                PressurePlate *ob = static_cast<PressurePlate*>(map.getObject(activator));
+                PressurePlate *ob = dynamic_cast<PressurePlate*>(map.getObject(activator));
+                std::cout << "PRESSUREPLATE " << ob << '\n';
+                if (ob ==nullptr) {
+                  Object *topObj = map.removeObject(activator);
+                  ob = static_cast<PressurePlate*>(map.getObject(activator));
+                  map.insertObject(topObj);
+                }
                 d->activatorObj = ob;
                 ob->activateObj = d;
               }

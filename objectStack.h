@@ -9,6 +9,7 @@
     public:
       ObjectStack();
       ObjectStack(int d);
+      void deleteStack();
       void push(Object *o);
       Object* pop();
       Object* top();
