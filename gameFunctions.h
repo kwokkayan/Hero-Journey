@@ -21,7 +21,8 @@
 #include "infoTile.h"
 #include "wall.h"
 #include "snake.h"
-#include "void.h"
+#include "winTile.h"
+#include "infoTile.h"
 
 #ifndef GAMEFUNCTIONS_H
 #define GAMEFUNCTIONS_H
