@@ -17,7 +17,6 @@ ObjectStack::ObjectStack(int d) {
 }
 void ObjectStack::deleteStack() {
   for (int i = 0; i < depth; i++) {
-    std::cout << "freeing object " << static_cast<char>(stack[i]->icon) << '\n';
     delete stack[i];
   }
   delete[] stack;

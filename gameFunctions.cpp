@@ -93,12 +93,51 @@ void game_func::drawMenu(std::string address) { //draws menu
   } else std::cout << "Menu not found!\n";
   inFile.close();
 }
+void game_func::selectSlotToSave(std::vector<int> options, int &sel) {
+  bool hasSelectedValid = false;
+  while (!hasSelectedValid) {
+    char in = game_func::getKeystroke();
+    if (in == 'q' || in == 'Q')
+      break;
+    if (in >= '0' && in <= '9') {
+      hasSelectedValid = true;
+      sel = in - 48;
+    }
+
+    for (std::vector<int>::iterator it = options.begin(); it != options.end(); it++) {
+      if (in - 48 == *it) {
+        setFormat(40);
+        std::cout << "Chosen file will be overwritten! Press c/C to confirm.";
+        char confirm = game_func::getKeystroke();
+        if (confirm != 'c' && confirm != 'C') {
+          hasSelectedValid = false;
+          sel = -1;
+        }
+        break;
+      }
+    }
+  }
+}
+void game_func::selectSlotToLoad(std::vector<int> options, int &sel) {
+  bool hasSelectedValid = false;
+  while (!hasSelectedValid) {
+    char in = game_func::getKeystroke();
+    if (in == 'q' || in == 'Q')
+      break;
+    for (std::vector<int>::iterator it = options.begin(); it != options.end(); it++) {
+      if (in - 48 == *it) {
+        hasSelectedValid = true;
+        sel = *it;
+      }
+    }
+  }
+}
 void game_func::drawSaveMenu(std::vector<int> &existingSavesId) {
   std::string menuAddress = "menu/saveMenu.txt";
   std::string saveDir = "saves/";
   std::ofstream outFile(menuAddress);
   if (outFile.is_open()) {
-    outFile << 30 << ' ' << 11 << '\n';
+    outFile << 30 << ' ' << 12 << '\n';
     outFile << "Save Menu\n";
     for (int i = 0; i < 10; i++) {
       std::ifstream temp(saveDir + "save" + std::to_string(i) + ".txt");
@@ -112,6 +151,7 @@ void game_func::drawSaveMenu(std::vector<int> &existingSavesId) {
       temp.close();
     }
   }
+  outFile << "Q: Exit\n";
   outFile.close();
   game_func::drawMenu(menuAddress);
 }
@@ -120,7 +160,7 @@ void game_func::drawLoadMenu(std::vector<int> &existingSavesId) {
   std::string saveDir = "saves/";
   std::ofstream outFile(menuAddress);
   if (outFile.is_open()) {
-    outFile << 30 << ' ' << 11 << '\n';
+    outFile << 30 << ' ' << 12 << '\n';
     outFile << "Load Menu\n";
     for (int i = 0; i < 10; i++) {
       std::ifstream temp(saveDir + "save" + std::to_string(i) + ".txt");
@@ -132,6 +172,7 @@ void game_func::drawLoadMenu(std::vector<int> &existingSavesId) {
       temp.close();
     }
   }
+  outFile << "Q: Exit\n";
   outFile.close();
   game_func::drawMenu(menuAddress);
 }
@@ -298,41 +339,36 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
           break;
         }
         case game_func::menuFuncions::SAVE: {
-          game_func::setFormat(40);
-          std::string address;
           std::vector<int> existingSavesId;
           game_func::drawSaveMenu(existingSavesId);
 
           //std::cout << "Please input savefile name (if exists it will be overwritten!): ";
           //std::cin >> address;
-          int sel;
-          
-          game_func::save("saves/" + address, map, camera);
-          game_func::setFormat(40);
-
-          std::cout << "Save completed! Press any key to continue...";
-          char c = getKeystroke();
+          int sel = -1;
+          selectSlotToSave(existingSavesId, sel);
+          if (sel != -1) {
+            game_func::save("saves/save" + std::to_string(sel) + ".txt", map, camera);
+            game_func::setFormat(40);
+            std::cout << "Save completed! Press any key to continue...";
+            char c = getKeystroke();
+          }
           break;
         }
         case game_func::menuFuncions::LOAD: {
-          game_func::setFormat(40);
-          std::string address;
           std::vector<int> existingSavesId;
           game_func::drawLoadMenu(existingSavesId);
 
-          std::cout << "Please input loadfile name: ";
-          std::cin >> address;
-          map.deleteMap();
-          std::cout << "map deleted\n";
-          mobQueue.clear();
-          std::cout << "mobQueue deleted\n";
-          delete camera;
-          std::cout << "camera deleted\n";
-          std::cout << "all Objects deleted! \n";
-          game_func::load("saves/" + address, map, wintile, mobQueue, player, camera);
-
-          std::cout << "Load completed! Press any key to continue...";
-          char c = getKeystroke();
+          int sel = -1;
+          selectSlotToLoad(existingSavesId, sel);
+          if (sel != -1) {
+            map.deleteMap();
+            mobQueue.clear();
+            delete camera;
+            game_func::load("saves/save" + std::to_string(sel) + ".txt", map, wintile, mobQueue, player, camera);
+            game_func::setFormat(40);
+            std::cout << "Load completed! Press any key to continue...";
+            char c = getKeystroke();
+          }
           break;
         }
         case game_func::menuFuncions::LEAVEGAME: {
@@ -469,7 +505,6 @@ void game_func::save(std::string address, Map map, Camera *c) {
 }
 void game_func::load(std::string address, Map &map, WinTile *&win, std::vector<Moveable*> &mobQueue, Player *&p, Camera *&c) {
   std::ifstream inFile(address);
-  std::cout << "hi\n";
   p = new Player("empty", 0, 0); //so ugly :(
 
   if (inFile.is_open()) {
@@ -555,7 +590,6 @@ void game_func::load(std::string address, Map &map, WinTile *&win, std::vector<M
                 d->activatorObj = nullptr;
               } else {
                 PressurePlate *ob = dynamic_cast<PressurePlate*>(map.getObject(activator));
-                std::cout << "PRESSUREPLATE " << ob << '\n';
                 if (ob ==nullptr) {
                   Object *topObj = map.removeObject(activator);
                   ob = static_cast<PressurePlate*>(map.getObject(activator));

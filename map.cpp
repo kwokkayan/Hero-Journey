@@ -46,15 +46,11 @@ void Map::createEmptyMap(int w, int h, int d) {
 void Map::deleteMap() {
   for (int i = 0; i < height; i++) {
     for (int j = 0; j < width; j++) {
-      std::cout << "freeing stack " << j << " " << i << '\n';
       mapPtr[i][j]->deleteStack();
-      std::cout << "freeing mapptr " << j << " " << i << '\n';
       delete mapPtr[i][j];
     }
-    std::cout << "freeing mapptr " << i << '\n';
     delete[] mapPtr[i];
   }
-  std::cout << "freeing mapptr" << '\n';
   delete[] mapPtr;
 }
 void Map::updateMap(Point center, int w) {

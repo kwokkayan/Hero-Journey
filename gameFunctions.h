@@ -43,7 +43,8 @@ namespace game_func {
   void clrScr(int t);
   void drawUI(Player* p); //IOMANIP
   void drawMenu(std::string address); //all are in menu dir
-  void selectSave(int &sel);
+  void selectSlotToSave(std::vector<int> options, int &sel);
+  void selectSlotToLoad(std::vector<int> options, int &sel);
   void drawSaveMenu(std::vector<int> &existingSavesId);
   void drawLoadMenu(std::vector<int> &existingSavesId);
   void menuLoop(game_func::menuFuncions &f);

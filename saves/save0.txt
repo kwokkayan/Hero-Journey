@@ -43,6 +43,7 @@ end
 3 1
 end
 1
+9 5 2 4
 end
 1
 end
@@ -129,11 +130,9 @@ end
 1
 end
 1
-4 Derek 93 0
 end
 1
-6 1 5 5
-9 5 2 3
+6 0 5 5
 end
 1
 end
@@ -173,6 +172,7 @@ end
 1
 end
 1
+4 Derek 100 0
 end
 1
 end
@@ -219,7 +219,7 @@ end
 1
 end
 1
-7 1 3 3
+7 0 3 3
 end
 1
 end
@@ -414,10 +414,10 @@ end
 3 1
 end
 1
-9 5 2 3
+9 5 2 4
 end
 1
-9 5 2 3
+9 5 2 4
 end
 1
 end
