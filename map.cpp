@@ -114,6 +114,7 @@ Object* Map::getObject(Point p) {
     return nullptr;
   return mapPtr[p.y][p.x]->top();
 }
+
 void Map::moveObject(Point from, Point to) {
   Object *o = this->removeObject(from);
   if (o != nullptr)

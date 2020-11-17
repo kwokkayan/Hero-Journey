@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "objectStack.h"
+#include "void.h"
 
 ObjectStack::ObjectStack() {
   depth = 0;
@@ -12,7 +13,7 @@ ObjectStack::ObjectStack(int d) {
   index = depth - 1;
   stack = new Object*[depth]; //error
   for (int i = 0; i < depth; i++) {
-    stack[i] = new Object();
+    stack[i] = new Void();
   }
 }
 void ObjectStack::deleteStack() {
@@ -28,7 +29,7 @@ void ObjectStack::push(Object *o) {
 }
 Object* ObjectStack::pop() {
   Object* temp = stack[++index];
-  stack[index] = new Object();
+  stack[index] = new Void();
   return temp;
 }
 Object* ObjectStack::top() {

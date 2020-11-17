@@ -1,0 +1,813 @@
+20 20 5
+10
+3 1
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+8
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+6 0 5 5
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+11 out/testinfo.txt
+4 Derek 58 0
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+9 5 3 3
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+5
+end
+1
+end
+1
+end
+1
+7 0 2 2
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+10 0
+end
+3 1
+end
+3 1
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+3 1
+end

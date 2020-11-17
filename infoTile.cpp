@@ -10,9 +10,11 @@ InfoTile::InfoTile(std::string a, int px, int py) : Object (ObjectId::INFOTILE, 
   address = a;
   std::ifstream fin;
   fin.open(address);
-  std::string s;
-  while (getline(fin, s)) {
-    info += s + '\n';
+  if (fin.is_open()) {
+    std::string s;
+    while (getline(fin, s)) {
+      info += s + '\n';
+    }
   }
 }
 void InfoTile::process(Point p) {
