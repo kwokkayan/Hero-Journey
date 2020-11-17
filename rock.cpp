@@ -12,6 +12,8 @@ void Rock::process(Point p) {
 }
 bool Rock::check(Object *o) {
   //std::cout << "Rock check\n";
+  if (o->id == ObjectId::WINTILE || o->id == ObjectId::INFOTILE)
+    return false;
   if (o->id == ObjectId::ZOMBIE || o->id == ObjectId::SNAKE) //kinda shit
     return true;
   return o->isValid();

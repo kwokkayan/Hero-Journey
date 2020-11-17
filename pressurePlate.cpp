@@ -2,9 +2,16 @@
 
 #include "pressurePlate.h"
 #include "colorIO.h"
-PressurePlate::PressurePlate(int px, int py) : Object(ObjectId::PRESSUREPLATE, ObjectIcon::PRESSUREPLATE, px, py){
+PressurePlate::PressurePlate(int px, int py) : Object(ObjectId::PRESSUREPLATE, ObjectIcon::PRESSUREPLATE, px, py) {
   isPressed = false;
   activateObj = nullptr;
+}
+PressurePlate::PressurePlate(bool ip, Openable *ao, int px, int py) : Object(ObjectId::PRESSUREPLATE, ObjectIcon::PRESSUREPLATE, px, py) {
+  isPressed = ip;
+  activateObj = ao;
+}
+PressurePlate::PressurePlate(bool ip, int px, int py) : Object(ObjectId::PRESSUREPLATE, ObjectIcon::PRESSUREPLATE, px, py) {
+  isPressed = ip;
 }
 void PressurePlate::activate() {
   isPressed = true;

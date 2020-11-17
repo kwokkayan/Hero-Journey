@@ -12,7 +12,7 @@
       bool justTookDmg;
       std::string name;
       Player(std::string n, int px, int py);
-
+      Player(std::string n, int hp, bool justTookDmg, int px, int py); //for save/load
       void takeDmg();
 
       void process(Point p);

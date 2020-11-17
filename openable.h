@@ -7,6 +7,7 @@
       bool isOpened;
       Object *activatorObj;
       Openable(ObjectId id, ObjectIcon icon, int px, int py);
+      Openable(bool io, Object *ao, ObjectId id, ObjectIcon icon, int px, int py);
       virtual void open();
       virtual void close();
   };

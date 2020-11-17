@@ -8,6 +8,8 @@
       bool isPressed;
       Openable *activateObj; //multiple stuff array
       PressurePlate(int px, int py);
+      PressurePlate(bool ip, int px, int py);
+      PressurePlate(bool ip, Openable *ao, int px, int py);
       void activate();
       void deactivate();
       void process(Point p);

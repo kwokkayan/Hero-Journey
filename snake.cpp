@@ -10,6 +10,16 @@ Snake::Snake(Player *p, int px, int py) : Moveable(ObjectId::SNAKE, ObjectIcon::
   player = p;
   viewDistance = 5;
 }
+Snake::Snake(Player *p, int vd, int px, int py) : Moveable(ObjectId::SNAKE, ObjectIcon::SNAKE, px, py) {
+  srand(time(NULL)); //it is like this?
+  player = p;
+  viewDistance = vd;
+}
+Snake::Snake(int vd, int px, int py) : Moveable(ObjectId::SNAKE, ObjectIcon::SNAKE, px, py) {
+  srand(time(NULL)); //it is like this?
+  player = nullptr;
+  viewDistance = vd;
+}
 void Snake::move(Map m) {
   std::vector<Point> plist = pos.closestPointsTo(player->pos, viewDistance);
   if (plist.size() > 0) {
@@ -33,7 +43,7 @@ bool Snake::check(Point p, Map m) {
     return false;
 
   Object *nextObject = m.getObject(p);
-  if (nextObject->isValid()) { //if valid spot then gogogo
+  if (nextObject->isValid() && nextObject->id != ObjectId::WINTILE && nextObject->id != ObjectId::INFOTILE) { //if valid spot then gogogo
     nextObject->process(p);
     return true;
   }

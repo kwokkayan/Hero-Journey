@@ -5,8 +5,9 @@
 #include "gameFunctions.h"
 #include "colorIO.h"
 
-InfoTile::InfoTile(std::string address, int px, int py) : Object (ObjectId::INFOTILE, ObjectIcon::INFOTILE, px, py) {
+InfoTile::InfoTile(std::string a, int px, int py) : Object (ObjectId::INFOTILE, ObjectIcon::INFOTILE, px, py) {
   info = "";
+  address = a;
   std::ifstream fin;
   fin.open(address);
   std::string s;

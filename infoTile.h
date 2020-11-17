@@ -5,7 +5,7 @@
   class InfoTile : public Object { //preload
     public:
       std::string info, address;
-      InfoTile(std::string address, int px, int py);
+      InfoTile(std::string a, int px, int py);
       void process(Point p);
       bool check(Object *o);
       bool isValid();

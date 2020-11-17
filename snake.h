@@ -11,8 +11,10 @@
       std::vector<Point> plist; //closest points to player
       Player *player; //get player pos
       int viewDistance;
-      
+
       Snake(Player *p, int px, int py);
+      Snake(Player *p, int vd, int px, int py); // For save/load
+      Snake(int vd, int px, int py);
       void move(Map m);
       void dealDmg(Moveable *m);
 

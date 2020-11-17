@@ -3,7 +3,8 @@
 #include "wall.h"
 #include "colorIO.h"
 
-Wall::Wall(bool isSideWall, int px, int py) : Object(ObjectId::VOID, ObjectIcon::VOID, px, py) {
+Wall::Wall(bool isw, int px, int py) : Object(ObjectId::VOID, ObjectIcon::VOID, px, py) {
+  isSideWall = isw;
   if (isSideWall) {
     icon = ObjectIcon::SIDEWALL;
     id = ObjectId::SIDEWALL;

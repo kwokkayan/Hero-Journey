@@ -6,7 +6,8 @@
 #define WALL_H
   class Wall : public Object { //The floor
     public:
-      Wall(bool isSideWall, int px, int py);
+      bool isSideWall;
+      Wall(bool isw, int px, int py);
       void process(Point p);
       bool check(Object *o);
       bool isValid();

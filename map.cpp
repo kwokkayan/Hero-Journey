@@ -12,9 +12,23 @@ Map::Map() {
   height = 0;
   mapPtr = nullptr;
 }
-void Map::createEmptyMap(int w, int h, int depth) {
+Map::Map(int w, int h, int d) { //the real empty map
   width = w;
   height = h;
+  depth = d;
+  mapPtr = new ObjectStack**[height];
+  for (int i = 0; i < height; i++) {
+    mapPtr[i] = new ObjectStack*[width];
+    for (int j = 0; j < width; j++) {
+      mapPtr[i][j] = new ObjectStack(depth);
+    }
+  }
+}
+void Map::createEmptyMap(int w, int h, int d) {
+  width = w;
+  height = h;
+  depth = d;
+
   mapPtr = new ObjectStack**[height];
   for (int i = 0; i < height; i++) {
     mapPtr[i] = new ObjectStack*[width];
@@ -47,7 +61,7 @@ void Map::updateMap(Point center, int w) {
         continue;
       if (j >= width)
         break;
-        
+
       Point currPos = Point(j, i);
       Object *currObj = this->getObject(currPos); //so inefficient :(
 
@@ -101,5 +115,12 @@ void Map::moveObject(Point from, Point to) {
   if (o != nullptr)
     this->insertObject(o, to);
 }
+int Map::numOfObject(Point p) {
+  return mapPtr[p.y][p.x]->size();
+}
+int Map::numOfObject(int px, int py) {
+  return mapPtr[py][px]->size();
+}
 int Map::getWidth() { return width; }
 int Map::getHeight() { return height; }
+int Map::getDepth() { return depth; }

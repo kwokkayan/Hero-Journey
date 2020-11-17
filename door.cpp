@@ -4,6 +4,8 @@
 #include "colorIO.h"
 
 Door::Door(int px, int py) : Openable(ObjectId::DOOR, ObjectIcon::DOOR, px, py) {}
+Door::Door(bool io, int px, int py) : Openable(io, nullptr, ObjectId::DOOR, ObjectIcon::DOOR, px, py) {}
+Door::Door(bool io, Object *ao, int px, int py) : Openable(io, ao, ObjectId::DOOR, ObjectIcon::DOOR, px, py) {}
 
 void Door::open() {
   isOpened = true;

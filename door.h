@@ -6,7 +6,8 @@
   class Door : public Openable {
     public:
       Door(int px, int py);
-
+      Door(bool io, int px, int py);
+      Door(bool io, Object *ao, int px, int py);
       void open();
       void close();
 

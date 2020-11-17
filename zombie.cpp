@@ -54,7 +54,7 @@ bool Zombie::check(Point p, Map m) {
     return false;
 
   Object *nextObject = m.getObject(p);
-  if (nextObject->isValid()) { //if valid spot then gogogo
+  if (nextObject->isValid() && nextObject->id != ObjectId::WINTILE && nextObject->id != ObjectId::INFOTILE) { //if valid spot then gogogo
     nextObject->process(p);
     return true;
   }

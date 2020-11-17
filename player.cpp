@@ -9,6 +9,11 @@ Player::Player(std::string n, int px, int py) : Moveable(ObjectId::PLAYER, Objec
   name = n;
   justTookDmg = false;
 }
+Player::Player(std::string n, int h, bool jtd, int px, int py) : Moveable(ObjectId::PLAYER, ObjectIcon::PLAYER, px, py) {
+  hp = h;
+  name = n;
+  justTookDmg = jtd;
+}
 void Player::takeDmg() {
   --hp;
   justTookDmg = true;
@@ -22,7 +27,7 @@ bool Player::check(Point p, Map m) {
 
   Object *nextObject = m.getObject(p);
   if (nextObject->isValid()) { //if valid spot then gogogo
-    nextObject->process(p);
+    nextObject->process(p); //CHANGED NOW
     this->process(p);
     return true;
   } else if (nextObject->id == ObjectId::VOID || nextObject->id == ObjectId::TOPWALL || nextObject->id == ObjectId::SIDEWALL) {

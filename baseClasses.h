@@ -21,7 +21,9 @@
     PRESSUREPLATE,
     DOOR,
     ZOMBIE,
-    SNAKE
+    SNAKE,
+    WINTILE,
+    INFOTILE
   };
   // ObjectIcon stores all icons (in ASCII character) of objects, mirrored with ObjectId
   enum class ObjectIcon {
@@ -34,7 +36,9 @@
     PRESSUREPLATE = '*',
     DOOR = '+',
     ZOMBIE = 'Z',
-    SNAKE = 'S'
+    SNAKE = 'S',
+    WINTILE = '.',
+    INFOTILE = '!'
   };
   // Point stores the Cartesian coordinates of all objects
   // and functions that manipulate them

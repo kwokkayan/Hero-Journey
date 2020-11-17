@@ -3,3 +3,4 @@ camera 15
 rock 2 3
 door 5 5
 pressureplate 3 3
+Zombie 7 7
