@@ -21,6 +21,7 @@
 #include "infoTile.h"
 #include "wall.h"
 #include "snake.h"
+#include "void.h"
 #include "winTile.h"
 #include "infoTile.h"
 
