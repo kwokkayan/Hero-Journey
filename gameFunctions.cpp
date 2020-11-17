@@ -231,7 +231,7 @@ void game_func::printWinScreen() {
   std::cout << "You win!\n";
 }
 //Long's function
-void game_func::readLevel(std::string levelFile, Map &map, std::vector<Moveable*> &mobQueue, Player *&p, Camera *&c) {
+void game_func::readLevel(std::string levelFile, Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&p, Camera *&c) {
 
   std::ifstream fin;
   fin.open(levelFile.c_str());
@@ -240,95 +240,91 @@ void game_func::readLevel(std::string levelFile, Map &map, std::vector<Moveable*
 
   while (fin >> objectType) {
     //bool linking = false;
-    if (objectType == "player") {
+    if (objectType == "map") {
+      int width, height, depth = 5;
+      fin >> width >> height;
+      map.createEmptyMap(width, height, depth);
+    } else if (objectType == "player") {
       std::string n;
       int px, py;
       fin >> n >> px >> py;
       p = new Player(n, px, py);
       std::cout << "Player " << p << " created at " << p->pos.x << " " << p->pos.y << '\n';
       map.insertObject(p);
-    }
-    else if (objectType == "camera") {
+    } else if (objectType == "camera") {
       int l;
       fin >> l;
       c = new Camera(l, p->pos);
       std::cout << "Camera with length " << l << " created at " << c->camera_pos.x << " " << c->camera_pos.y << '\n';
-    }
-    // How to use link
-    // in txt
-    // ...
-    // link
-    // *PressurePlate Declaration*
-    // *Door Declaration* //change to declare openable
-    else if (objectType == "link") {
+    } else if (objectType == "link") {
+      // How to use link
+      // in txt
+      // ...
+      // link
+      // *PressurePlate Declaration*
+      // *Door Declaration* //change to declare openable
+      // ...
+      std::string n;
       int px, py;
 
-      fin >> px >> py;
+      fin >> n >> px >> py;
       PressurePlate *pp = new PressurePlate(px, py);
       std::cout << "PressurePlate created at " << pp->pos.x << " " << pp->pos.y << '\n';
       map.insertObject(pp);
 
-      fin >> px >> py;
+      fin >> n >> px >> py;
       Door *d = new Door(px, py);
       std::cout << "Door created at " << d->pos.x << " " << d->pos.y << '\n';
       map.insertObject(d);
 
       pp->activateObj = d;
       d->activatorObj = pp;
-    }
-    else if (objectType == "door") {
+    } else if (objectType == "door") {
       int px, py;
       fin >> px >> py;
       Door *d = new Door(px, py);
       std::cout << "Door created at " << d->pos.x << " " << d->pos.y << '\n';
       map.insertObject(d);
-    }
-    else if (objectType == "pressureplate") {
+    } else if (objectType == "pressureplate") {
       int px, py;
       fin >> px >> py;
       PressurePlate *pp = new PressurePlate(px, py);
       std::cout << "PressurePlate created at " << pp->pos.x << " " << pp->pos.y << '\n';
       map.insertObject(pp);
-    }
-    else if (objectType == "rock") {
+    } else if (objectType == "rock") {
       int px, py;
       fin >> px >> py;
       Rock *r = new Rock(px, py);
       std::cout << "Rock created at " << r->pos.x << " " << r->pos.y << '\n';
       map.insertObject(r);
-    }
-    else if (objectType == "wall") {
+    } else if (objectType == "wall") {
       bool isSideWall;
       int px, py;
       fin >> isSideWall >> px >> py;
       Wall *w = new Wall(isSideWall, px, py);
       std::cout << "Wall created at " << w->pos.x << " " << w->pos.y << '\n';
       map.insertObject(w);
-    }
-    else if (objectType == "zombie") {
+    } else if (objectType == "zombie") {
       int px, py;
       fin >> px >> py;
       Zombie *z = new Zombie(px, py);
       std::cout << "Zombie created at " << z->pos.x << " " << z->pos.y << '\n';
       mobQueue.push_back(z);
       map.insertObject(z);
-    }
-    else if (objectType == "snake") {
+    } else if (objectType == "snake") {
       int px, py;
       fin >> px >> py;
       Snake *s = new Snake(p, px, py);
       std::cout << "Snake created\n";
       mobQueue.push_back(s);
       map.insertObject(s);
-    }
-    else if (objectType == "wintile") {
+    } else if (objectType == "wintile") {
       int px, py;
       fin >> px >> py;
-      WinTile *wintile = new WinTile(px, py);
+      wintile = new WinTile(px, py);
       std::cout << "WinTile created\n";
       map.insertObject(wintile);
-    }
-    else if (objectType == "infotile") {
+    } else if (objectType == "infotile") {
       std::string address;
       int px, py;
       fin >> address >> px >> py;
@@ -349,7 +345,6 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
   while (true) {
     game_func::drawUI(player);
     camera->draw(map);
-
     if (wintile->hasWon) {
       game_func::printWinScreen();
       break;
@@ -360,6 +355,7 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
     }
 
     game_func::detectGameControls(player, newP); //change to pass by reference
+    std::cout << "dsd\n";
     std::cout << newP.x << ' ' << newP.y << '\n';
     if (newP.equalsTo(-2, -2)) { //open menu
       game_func::drawMenu("menu/menu.txt");

@@ -50,7 +50,7 @@ namespace game_func {
   void menuLoop(game_func::menuFuncions &f);
   void printLoseScreen(); //IOMANIP
   void printWinScreen();  //IOMANIP
-  void readLevel(std::string levelFile, Map &map, std::vector<Moveable*> &mobQueue, Player *&p, Camera *&c);
+  void readLevel(std::string levelFile, Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&p, Camera *&c);
   void gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&player, Camera *&camera);
 
   void save(std::string address, Map map, Camera *c);

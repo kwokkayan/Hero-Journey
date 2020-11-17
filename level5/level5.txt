@@ -1,0 +1,14 @@
+map 10 10
+player BOT 2 2
+camera 15
+link
+pressureplate 3 3
+door 5 5
+rock 5 7
+rock 5 8
+zombie 4 5
+zombie 4 6
+snake 1 8
+snake 2 8
+wintile 8 8
+infotile info.txt 8 7
