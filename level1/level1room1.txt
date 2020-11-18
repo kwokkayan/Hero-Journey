@@ -1,0 +1,1 @@
+'|' and '=' are walls. You can not walk through them.

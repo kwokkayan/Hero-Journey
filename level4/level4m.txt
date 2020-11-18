@@ -2,10 +2,10 @@ map 21 21
 player BOT 2 2
 camera 15
 infotile level4/level4info.txt 4 1
-infotile level4/room1.txt 6 1
-infotile level4/room2.txt 6 11
-infotile level4/room3.txt 11 18
-infotile level4/room4.txt 16 9
+infotile level4/level4room1.txt 6 1
+infotile level4/level4room2.txt 6 11
+infotile level4/level4room3.txt 11 18
+infotile level4/level4room4.txt 16 9
 wintile 15 1
 wall 1 10 1
 wall 1 10 2

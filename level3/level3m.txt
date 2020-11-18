@@ -1,6 +1,6 @@
 map 15 15
 player Bruh 2 1
-camera 5
+camera 6
 wall 1 4 1
 wall 1 12 1
 wall 0 1 2

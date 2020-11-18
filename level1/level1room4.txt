@@ -1,0 +1,4 @@
+'Z' are Zombies, which randomly move.
+'S' are Snakes, which always chase you.
+Your HP is deducted whenever they touch you. Watch out!
+They only move when you move. Try to observe their movements! It may help later.

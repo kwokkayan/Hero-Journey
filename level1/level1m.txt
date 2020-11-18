@@ -1,0 +1,65 @@
+map 9 30
+player BOT 4 2
+camera 12
+infotile level1/level1info.txt 2 1
+wall 0 1 4
+wall 0 2 4
+wall 0 3 4
+wall 0 5 4
+wall 0 6 4
+wall 0 7 4
+infotile level1/level1room1.txt 3 5
+wall 1 2 6
+wall 1 2 7
+wall 1 2 8
+wall 0 7 6
+wall 0 6 6
+wall 0 6 8
+wall 0 1 10
+wall 0 2 10
+wall 0 3 10
+wall 0 5 10
+wall 0 6 10
+wall 0 7 10
+infotile level1/level1room2.txt 3 11
+wall 1 2 11
+wall 1 2 13
+door 2 12
+link
+pressureplate 5 12
+door 6 12
+wall 0 1 14
+wall 0 2 14
+wall 0 3 14
+wall 0 5 14
+wall 0 6 14
+wall 0 7 14
+infotile level1/level1room3.txt 3 15
+wall 0 1 20
+wall 0 2 20
+wall 0 3 20
+wall 0 4 20
+wall 0 5 20
+wall 1 5 15
+wall 1 5 17
+wall 1 5 18
+wall 1 5 19
+link
+pressureplate 1 19
+door 5 16
+rock 2 17
+infotile level1/level1room4.txt 7 21
+wall 1 5 21
+wall 1 5 22
+wall 1 5 23
+wall 1 5 24
+wall 1 5 25
+zombie 2 22
+snake 1 24
+wall 0 1 26
+wall 0 2 26
+wall 0 3 26
+wall 0 4 26
+wall 0 5 26
+infotile level1/level1room5.txt 7 28
+wintile 1 28

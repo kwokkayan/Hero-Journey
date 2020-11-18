@@ -1,0 +1,7 @@
+Level 1: Tutorial
+Welcome to the Dungeon!
+There are 5 levels in this dungeon and each level has its unique challenges.
+You will also encounter hostile monsters!
+
+Level 1 (this level) will be a tutorial which helps you identify different objects in the dungeon and monsters.
+Let's start by walking to the first room!

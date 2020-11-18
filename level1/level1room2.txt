@@ -1,0 +1,4 @@
+Green rectangles with a cross are doors.
+White cross means locked and black cross means unlocked.
+You can only walk through unlocked doors.
+Red rectangles are pressure plates. You can unlock a locked door by activating a pressure plate.

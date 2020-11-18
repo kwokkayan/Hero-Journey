@@ -1,0 +1,2 @@
+'#' are rocks. You cannot walk through them, but you can push them.
+You can activate a pressure plate by pushing a rock to it!

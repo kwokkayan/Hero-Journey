@@ -1,2 +1,2 @@
-Level 2: Rock pushing game
+Level 2: Rock Pushing Puzzle
 Push the rocks to the pressure plates to unlock the doors!

@@ -1,2 +1,2 @@
-Level3: Maze
-Find your way to the Win Tile!
+Level 3: Maze
+Find your way to the portal!
