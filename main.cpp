@@ -9,7 +9,7 @@
 #include "gameFunctions.h"
 #include "editor.h"
 
-int main() {
+int main(int argc, char* argv[]) {
   //std::string levelFileAddress;
   //std::cout << "input level file path: ";
   //std::cin >> levelFileAddres
