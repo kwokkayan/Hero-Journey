@@ -41,6 +41,7 @@ namespace game_func {
     MAINMENU
   };
   enum class mainMenuFunctions {
+    STORY,
     SELECT,
     LOAD,
     LEAVEGAME
@@ -50,7 +51,7 @@ namespace game_func {
   void detectGameControls(Player *p, Point &pos);
   void clrScr(int t);
   void clearObjects(Map &map, std::vector<Moveable*> &mobQueue, Camera *&camera);
-  
+
   void drawUI(Player* p); //IOMANIP
   void drawMenu(std::string address); //all are in menu dir
 
@@ -60,7 +61,7 @@ namespace game_func {
   void drawLoadMenu(std::vector<int> &existingSavesId);
 
   void drawMainMenu();
-  void handleMainMenu(int levels, Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&player, Camera *&camera);
+  void handleMainMenu(int levels, Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&player, Camera *&camera, bool &isStoryMode);
   void drawLevelSelectMenu(int levels, std::vector<int> &scriptSavesId, std::vector<int> &existingLevelsId);
 
   void menuLoop(game_func::menuFunctions &f);
@@ -69,8 +70,8 @@ namespace game_func {
   void printLoseScreen(); //IOMANIP
   void printWinScreen();  //IOMANIP
 
-  void readLevel(std::string levelFile, Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&p, Camera *&c);
-  void gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&player, Camera *&camera);
+  void readScriptLevel(std::string levelFile, Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&p, Camera *&c);
+  void gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&player, Camera *&camera, bool &isStoryMode, bool &returnMainMenu);
 
   void save(std::string address, Map map, Camera *c);
   void load(std::string address, Map &map, WinTile *&win, std::vector<Moveable*> &mobQueue, Player *&p, Camera *&c);

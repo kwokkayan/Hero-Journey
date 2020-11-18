@@ -194,14 +194,18 @@ void game_func::drawMainMenu() {
   game_func::drawMenu("menu/mainMenu.txt");
 }
 
-void game_func::handleMainMenu(int levels, Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&player, Camera *&camera) {
+void game_func::handleMainMenu(int levels, Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&player, Camera *&camera, bool &isStoryMode) {
   game_func::mainMenuFunctions functionFlag;
   bool loadedLevel = false;
   bool hasQuitted = false;
-  while (!(loadedLevel || hasQuitted)) {
+  while (!(loadedLevel || hasQuitted || isStoryMode)) {
     game_func::drawMainMenu();
     game_func::mainMenuLoop(functionFlag);
     switch (functionFlag) {
+      case game_func::mainMenuFunctions::STORY: {
+        isStoryMode = true;
+        break;
+      }
       case game_func::mainMenuFunctions::SELECT: {
         std::vector<int> existingSavesId;
         std::vector<int> scriptSavesId;
@@ -228,7 +232,7 @@ void game_func::handleMainMenu(int levels, Map &map, WinTile *&wintile, std::vec
             game_func::load(address, map, wintile, mobQueue, player, camera);
           } else {
             std::string address = "level" + std::to_string(sel) + "/level" + std::to_string(sel) + "m.txt";
-            game_func::readLevel(address, map, wintile, mobQueue, player, camera);
+            game_func::readScriptLevel(address, map, wintile, mobQueue, player, camera);
           }
           game_func::setFormat(75);
           std::cout << "Load completed! Press any key to continue...";
@@ -259,6 +263,7 @@ void game_func::handleMainMenu(int levels, Map &map, WinTile *&wintile, std::vec
       }
       case game_func::mainMenuFunctions::LEAVEGAME: {
         hasQuitted = true;
+        player = nullptr; //for use in loop
         break;
       }
     }
@@ -307,6 +312,11 @@ void game_func::mainMenuLoop(game_func::mainMenuFunctions &f) {
     switch (input) {
       case 'S':
       case 's': {
+        f = game_func::mainMenuFunctions::STORY;
+        break;
+      }
+      case 'E':
+      case 'e': {
         f = game_func::mainMenuFunctions::SELECT;
         break;
       }
@@ -376,7 +386,7 @@ void game_func::printWinScreen() {
   std::cout << "You win!\n";
 }
 //Long's function
-void game_func::readLevel(std::string levelFile, Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&p, Camera *&c) {
+void game_func::readScriptLevel(std::string levelFile, Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&p, Camera *&c) {
 
   std::ifstream fin;
   fin.open(levelFile.c_str());
@@ -467,21 +477,34 @@ void game_func::readLevel(std::string levelFile, Map &map, WinTile *&wintile, st
   }
 }
 
-void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&player, Camera *&camera) {
+void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&player, Camera *&camera, bool &isStoryMode, bool &returnMainMenu) {
   Point newP = Point();
   //initial load here
+  int currentlevel = 1; //for storymode
   bool hasQuitted = false;
   bool noUpdate = false;
-  bool returnMainMenu = false;
 
   game_func::save("saves/autosave.txt", map, camera);
-
   while (true) {
     game_func::drawUI(player);
     camera->draw(map);
     if (wintile->hasWon) {
-      game_func::printWinScreen();
-      break;
+      if (!isStoryMode) {
+        game_func::printWinScreen();
+        break;
+      } else if (currentlevel == 4) { //change to 5!!!!!!
+        //print final cutscreen
+        game_func::printWinScreen();
+        break;
+      } else {
+        ++currentlevel;
+        std::string currlevelFile = "level" + std::to_string(currentlevel) + "/level" + std::to_string(currentlevel) + "m.txt";
+        game_func::clearObjects(map, mobQueue, camera);
+        game_func::readScriptLevel(currlevelFile, map, wintile, mobQueue, player, camera);
+        game_func::save("saves/autosave.txt", map, camera);
+        //cutscene
+        continue;
+      }
     }
     if (player->hp <= 0) {   //Losing condition
       game_func::printLoseScreen();
@@ -489,8 +512,6 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
     }
 
     game_func::detectGameControls(player, newP); //change to pass by reference
-    std::cout << "dsd\n";
-    std::cout << newP.x << ' ' << newP.y << '\n';
     if (newP.equalsTo(-2, -2)) { //open menu
       game_func::drawMenu("menu/menu.txt");
       game_func::menuFunctions selection;
@@ -555,12 +576,8 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
           break;
         }
       }
-      if (hasQuitted)
+      if (hasQuitted || returnMainMenu)
         break;
-      if (returnMainMenu) {
-        game_func::clearObjects(map, mobQueue, camera);
-        game_func::handleMainMenu(6, map, wintile, mobQueue, player, camera); //CHANGE LEVEL NUM
-      }
       continue;
     }
 
@@ -694,6 +711,7 @@ void game_func::load(std::string address, Map &map, WinTile *&win, std::vector<M
     c = new Camera(l, Point());
     for (int i = 0; i < map.getHeight(); i++) {
       for (int j = 0; j < map.getWidth(); j++) {
+        //std::cout << "x, y: " << j << ' ' << i << '\n';
         while (true) {
           std::string s;
           getline(inFile, s);
@@ -703,6 +721,7 @@ void game_func::load(std::string address, Map &map, WinTile *&win, std::vector<M
           int numId;
           stringIn >> numId;
           ObjectId id = static_cast<ObjectId>(numId);
+          //std::cout << s << '\n';
           switch (id) {
             case ObjectId::VOID: {
               Void *v = new Void(j, i);
@@ -753,6 +772,7 @@ void game_func::load(std::string address, Map &map, WinTile *&win, std::vector<M
                 Openable *op = dynamic_cast<Openable*>(map.getObject(activate));
                 if (op == nullptr) {
                   Object *topObj = map.removeObject(activate);
+                  op = static_cast<Openable*>(map.getObject(activate));
                   map.insertObject(topObj);
                 }
                 pp->activateObj = op;
@@ -765,13 +785,16 @@ void game_func::load(std::string address, Map &map, WinTile *&win, std::vector<M
               bool io;
               Point activator;
               stringIn >> io >> activator.x >> activator.y;
+              //std::cout << activator.x << " " << activator.y << " door\n";
               Door *d = new Door(io, j, i);
               if (activator.equalsTo(-1, -1) || (activator.y > i || (activator.y == i && activator.x > j))) {
                 d->activatorObj = nullptr;
               } else {
                 PressurePlate *ob = dynamic_cast<PressurePlate*>(map.getObject(activator));
+                //std::cout << ob << " door\n";
                 if (ob == nullptr) {
                   Object *topObj = map.removeObject(activator);
+                  ob = static_cast<PressurePlate*>(map.getObject(activator));
                   map.insertObject(topObj);
                 }
                 d->activatorObj = ob;

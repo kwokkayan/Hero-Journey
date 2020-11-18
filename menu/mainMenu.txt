@@ -1,5 +1,6 @@
-30 4
+30 5
 Main Menu
-S: Select level
+S: Story Mode
+E: Select level
 L: Load Game
 Q: Leave Game
