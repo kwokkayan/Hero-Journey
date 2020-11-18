@@ -1,0 +1,9 @@
+30 8
+Level Select Menu
+Level 1 : empty!
+Level 2 : empty!
+Level 3 : empty!
+Level 4 : empty!
+Level 5 : empty!
+Level 6 : exists!
+Q: Exit

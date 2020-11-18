@@ -1,10 +1,10 @@
 30 12
 Save Menu
 0: exists!
-1: exists!
-2: exists!
-3: exists!
-4: exists!
+1: empty!
+2: empty!
+3: empty!
+4: empty!
 5: empty!
 6: empty!
 7: empty!

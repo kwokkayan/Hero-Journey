@@ -23,7 +23,7 @@
     ZOMBIE,
     SNAKE,
     WINTILE,
-    INFOTILE
+    INFOTILE,
   };
   // ObjectIcon stores all icons (in ASCII character) of objects, mirrored with ObjectId
   enum class ObjectIcon {

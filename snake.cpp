@@ -6,17 +6,14 @@
 #include "colorIO.h"
 
 Snake::Snake(Player *p, int px, int py) : Moveable(ObjectId::SNAKE, ObjectIcon::SNAKE, px, py) {
-  srand(time(NULL)); //it is like this?
   player = p;
   viewDistance = 5;
 }
 Snake::Snake(Player *p, int vd, int px, int py) : Moveable(ObjectId::SNAKE, ObjectIcon::SNAKE, px, py) {
-  srand(time(NULL)); //it is like this?
   player = p;
   viewDistance = vd;
 }
 Snake::Snake(int vd, int px, int py) : Moveable(ObjectId::SNAKE, ObjectIcon::SNAKE, px, py) {
-  srand(time(NULL)); //it is like this?
   player = nullptr;
   viewDistance = vd;
 }

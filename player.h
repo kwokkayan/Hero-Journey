@@ -9,12 +9,13 @@
   class Player : public Moveable { //The player
     public:
       int hp;
-      bool justTookDmg;
+      bool justTookDmg, justHealed;
       std::string name;
       Player(std::string n, int px, int py);
-      Player(std::string n, int hp, bool justTookDmg, int px, int py); //for save/load
+      Player(std::string n, int hp, bool jtd, bool jh, int px, int py); //for save/load
       void takeDmg();
-
+      void heal(int health);
+      
       void process(Point p);
       bool check(Point p, Map m);
       bool isValid();
