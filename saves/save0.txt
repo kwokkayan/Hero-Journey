@@ -1,5 +1,5 @@
-20 20 3
-18
+20 20 5
+10
 3 1
 end
 2 0
@@ -43,7 +43,7 @@ end
 3 1
 end
 1
-9 5 2 4
+6 0 15 18
 end
 1
 end
@@ -58,6 +58,378 @@ end
 1
 end
 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+6 0 17 18
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+5
+end
+1
+5
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
 end
 1
 end
@@ -69,6 +441,9 @@ end
 1
 end
 1
+3 1
+end
+1
 end
 1
 end
@@ -97,143 +472,22 @@ end
 1
 end
 1
+2 0
 end
 1
+2 0
 end
 1
-5
+2 0
 end
 1
-8
+7 0 -1 -1
 end
 1
-5
+2 0
 end
 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-6 0 5 5
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-5
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-4 Derek 100 0
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-7 0 3 3
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
+2 0
 end
 1
 end
@@ -270,7 +524,6 @@ end
 1
 end
 1
-10 0
 end
 1
 end
@@ -351,7 +604,6 @@ end
 1
 end
 1
-11 sample_text/sample.txt
 end
 1
 end
@@ -362,12 +614,16 @@ end
 1
 end
 1
+3 1
 end
 1
+2 0
 end
 1
+2 0
 end
 1
+2 0
 end
 3 1
 end
@@ -402,22 +658,32 @@ end
 1
 end
 1
+3 1
 end
 1
 end
 1
 end
 1
+11 level6/startroom.txt
 end
 3 1
 end
 3 1
 end
 1
-9 5 2 4
 end
 1
-9 5 2 4
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
 end
 1
 end
@@ -441,16 +707,7 @@ end
 1
 end
 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
+4 Bruce 100 0 0
 end
 3 1
 end
@@ -485,58 +742,23 @@ end
 1
 end
 1
+2 0
 end
 1
+2 0
 end
 1
+2 0
 end
 1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
+2 0
 end
 3 1
 end
 3 1
 end
 1
+6 0 16 18
 end
 1
 end
@@ -565,212 +787,16 @@ end
 1
 end
 1
+7 0 1 1
 end
 1
+7 0 1 18
 end
 1
+7 0 18 1
 end
 1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
+10 0
 end
 3 1
 end

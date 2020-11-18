@@ -186,7 +186,120 @@ void game_func::drawLoadMenu(std::vector<int> &existingSavesId) {
   game_func::drawMenu(menuAddress);
 }
 
-void game_func::menuLoop(game_func::menuFuncions &f) {
+void game_func::drawMainMenu() {
+  game_func::drawMenu("menu/mainMenu.txt");
+}
+
+void game_func::handleMainMenu(int levels, Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&player, Camera *&camera) {
+  game_func::mainMenuFunctions functionFlag;
+  bool loadedLevel = false;
+  bool hasQuitted = false;
+  while (!(loadedLevel || hasQuitted)) {
+    game_func::drawMainMenu();
+    game_func::mainMenuLoop(functionFlag);
+    switch (functionFlag) {
+      case game_func::mainMenuFunctions::SELECT: {
+        std::vector<int> existingSavesId;
+        game_func::drawLevelSelectMenu(levels, existingSavesId);
+
+        int sel = -1;
+        selectSlotToLoad(existingSavesId, sel);
+        if (sel != -1) {
+          game_func::setFormat(55);
+          std::cout << "You have chosen level " << std::to_string(sel) <<"!\n";
+          //map.deleteMap();
+          //mobQueue.clear();
+          //delete camera;
+          std::string address = "level" + std::to_string(sel) + "/level" + std::to_string(sel) + ".txt";
+          game_func::load(address, map, wintile, mobQueue, player, camera);
+          game_func::setFormat(75);
+          std::cout << "Load completed! Press any key to continue...";
+          char c = getKeystroke();
+          loadedLevel = true;
+        }
+        break;
+      }
+      case game_func::mainMenuFunctions::LOAD: {
+        std::vector<int> existingSavesId;
+        game_func::drawLoadMenu(existingSavesId);
+
+        int sel = -1;
+        selectSlotToLoad(existingSavesId, sel);
+        if (sel != -1) {
+          game_func::setFormat(55);
+          std::cout << "You have chosen save " << std::to_string(sel) <<"!\n";
+          //map.deleteMap();
+          //mobQueue.clear();
+          //delete camera;
+          game_func::load("saves/save" + std::to_string(sel) + ".txt", map, wintile, mobQueue, player, camera);
+          game_func::setFormat(75);
+          std::cout << "Load completed! Press any key to continue...";
+          char c = getKeystroke();
+          loadedLevel = true;
+        }
+        break;
+      }
+      case game_func::mainMenuFunctions::LEAVEGAME: {
+        hasQuitted = true;
+        break;
+      }
+    }
+  }
+}
+
+void game_func::drawLevelSelectMenu(int level, std::vector<int> &existingLevelsId) {
+  std::string menuAddress = "menu/levelSelectMenu.txt";
+  std::ofstream outFile(menuAddress);
+  if (outFile.is_open()) {
+    outFile << 30 << ' ' << level + 2 << '\n';
+    outFile << "Level Select Menu\n";
+    for (int i = 1; i <= level; i++) {
+      std::string address = "level" + std::to_string(i) + "/level" + std::to_string(i) + ".txt";
+      outFile << "Level " << i << " : ";
+      std::ifstream temp(address);
+      if (temp.good()) {
+        outFile << "exists!\n"; //change to time stamp?
+        existingLevelsId.push_back(i);
+      } else {
+        outFile << "empty!\n"; //change to time stamp?
+      }
+      temp.close();
+    }
+  }
+  outFile << "Q: Exit\n";
+  outFile.close();
+  game_func::drawMenu(menuAddress);
+}
+
+void game_func::mainMenuLoop(game_func::mainMenuFunctions &f) {
+  char input = ' ';
+  bool hasChosen = false;
+  while (!hasChosen) {
+    input = game_func::getKeystroke();
+    hasChosen = true;
+    switch (input) {
+      case 'S':
+      case 's': {
+        f = game_func::mainMenuFunctions::SELECT;
+        break;
+      }
+      case 'L':
+      case 'l': {
+        f = game_func::mainMenuFunctions::LOAD;
+        break;
+      }
+      case 'Q':
+      case 'q': {
+        f = game_func::mainMenuFunctions::LEAVEGAME;
+        break;
+      }
+      default:
+        hasChosen = false;
+    }
+  }
+}
+
+void game_func::menuLoop(game_func::menuFunctions &f) {
   char input = ' ';
   bool hasChosen = false;
   while (!hasChosen) {
@@ -195,27 +308,27 @@ void game_func::menuLoop(game_func::menuFuncions &f) {
     switch (input) {
       case 'R':
       case 'r': {
-        f = game_func::menuFuncions::RESTART;
+        f = game_func::menuFunctions::RESTART;
         break;
       }
       case 'S':
       case 's': {
-        f = game_func::menuFuncions::SAVE;
+        f = game_func::menuFunctions::SAVE;
         break;
       }
       case 'L':
       case 'l': {
-        f = game_func::menuFuncions::LOAD;
+        f = game_func::menuFunctions::LOAD;
         break;
       }
       case 'Q':
       case 'q': {
-        f = game_func::menuFuncions::LEAVEGAME;
+        f = game_func::menuFunctions::LEAVEGAME;
         break;
       }
       case 'H':
       case 'h': {
-        f = game_func::menuFuncions::LEAVEMENU;
+        f = game_func::menuFunctions::LEAVEMENU;
         break;
       }
       default:
@@ -342,6 +455,8 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
   bool hasQuitted = false;
   bool noUpdate = false;
 
+  game_func::save("saves/autosave.txt", map, camera);
+
   while (true) {
     game_func::drawUI(player);
     camera->draw(map);
@@ -359,16 +474,22 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
     std::cout << newP.x << ' ' << newP.y << '\n';
     if (newP.equalsTo(-2, -2)) { //open menu
       game_func::drawMenu("menu/menu.txt");
-      game_func::menuFuncions selection;
+      game_func::menuFunctions selection;
       game_func::menuLoop(selection);
       switch (selection) {
-        case game_func::menuFuncions::RESTART: {
-          std::string n;
-          std::cout << "Nothing yet! :(";
+        case game_func::menuFunctions::RESTART: {
+          game_func::setFormat(55);
+          std::cout << "Restarting...\n";
+          map.deleteMap();
+          mobQueue.clear();
+          delete camera;
+          game_func::load("saves/autosave.txt", map, wintile, mobQueue, player, camera);
+          game_func::setFormat(75);
+          std::cout << "Restart completed! Press any key to continue...";
           char c = getKeystroke();
           break;
         }
-        case game_func::menuFuncions::SAVE: {
+        case game_func::menuFunctions::SAVE: {
           std::vector<int> existingSavesId;
           game_func::drawSaveMenu(existingSavesId);
 
@@ -386,7 +507,7 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
           }
           break;
         }
-        case game_func::menuFuncions::LOAD: {
+        case game_func::menuFunctions::LOAD: {
           std::vector<int> existingSavesId;
           game_func::drawLoadMenu(existingSavesId);
 
@@ -405,11 +526,11 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
           }
           break;
         }
-        case game_func::menuFuncions::LEAVEGAME: {
+        case game_func::menuFunctions::LEAVEGAME: {
           hasQuitted = true;
           break;
         }
-        case game_func::menuFuncions::LEAVEMENU: {
+        case game_func::menuFunctions::LEAVEMENU: {
           break;
         }
       }
@@ -479,7 +600,7 @@ void game_func::save(std::string address, Map map, Camera *c) {
             }
             case ObjectId::PLAYER: {
               Player *p = static_cast<Player*>(o);
-              outFile << static_cast<int>(p->id) << ' ' << p->name  << ' ' << p->hp << ' ' << p->justTookDmg << '\n';
+              outFile << static_cast<int>(p->id) << ' ' << p->name  << ' ' << p->hp << ' ' << p->justTookDmg << ' ' << p->justHealed << '\n';
               break;
             }
             case ObjectId::ROCK: {
@@ -580,11 +701,12 @@ void game_func::load(std::string address, Map &map, WinTile *&win, std::vector<M
             case ObjectId::PLAYER: {
               std::string n;
               int hp;
-              bool jtd;
-              stringIn >> n >> hp >> jtd;
+              bool jtd, jh;
+              stringIn >> n >> hp >> jtd >> jh;
               p->name = n; //so ugly, but snakeeee
               p->hp = hp;
               p->justTookDmg = jtd;
+              p->justHealed = jh;
               p->pos.x = j;
               p->pos.y = i;
               c->camera_pos = p->pos;
