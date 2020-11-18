@@ -5,11 +5,13 @@
 #include "map.h"
 #include "camera.h"
 #include "gameFunctions.h"
+#include "editor.h"
 
-int main() {
+int main(int argc, char* argv[]) {
   //std::string levelFileAddress;
   //std::cout << "input level file path: ";
   //std::cin >> levelFileAddress;
+  std::string flag = argv[1];
 
   Map map = Map();
   Player *player = nullptr;
@@ -17,6 +19,10 @@ int main() {
   WinTile *wintile = nullptr;
   std::vector<Moveable*> mobQueue;
 
-  game_func::readLevel("level5/level5.txt", map, wintile, mobQueue, player, camera);
+  if (flag == "editor") {
+    editor::createLevel("level6/level6.txt", map, wintile, mobQueue, player, camera);
+  } else {
+    game_func::readLevel("level5/level5.txt", map, wintile, mobQueue, player, camera);
+  }
   game_func::gameLoop(map, wintile, mobQueue, player, camera);
 }

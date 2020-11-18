@@ -22,7 +22,7 @@
 
         Object* getObject(int px, int py);
         Object* getObject(Point p);
-
+       
         void moveObject(Point from, Point to);
 
         int numOfObject(Point p);
