@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "player.h"
-#include "funnyTile.h"
 #include "colorIO.h"
 #include "void.h"
 

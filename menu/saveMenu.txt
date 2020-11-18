@@ -1,7 +1,7 @@
 30 12
 Save Menu
 0: exists!
-1: empty!
+1: exists!
 2: empty!
 3: empty!
 4: empty!
@@ -9,5 +9,5 @@ Save Menu
 6: empty!
 7: empty!
 8: empty!
-9: empty!
+9: exists!
 Q: Exit

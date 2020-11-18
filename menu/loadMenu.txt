@@ -1,4 +1,6 @@
 30 12
 Load Menu
 0: exists!
+1: exists!
+9: exists!
 Q: Exit
