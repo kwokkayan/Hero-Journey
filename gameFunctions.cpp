@@ -200,18 +200,32 @@ void game_func::handleMainMenu(int levels, Map &map, WinTile *&wintile, std::vec
     switch (functionFlag) {
       case game_func::mainMenuFunctions::SELECT: {
         std::vector<int> existingSavesId;
-        game_func::drawLevelSelectMenu(levels, existingSavesId);
+        std::vector<int> scriptSavesId;
+        bool isScriptFile = false;
+
+        game_func::drawLevelSelectMenu(levels, scriptSavesId, existingSavesId);
 
         int sel = -1;
-        selectSlotToLoad(existingSavesId, sel);
+        game_func::selectSlotToLoad(existingSavesId, sel);
         if (sel != -1) {
           game_func::setFormat(55);
           std::cout << "You have chosen level " << std::to_string(sel) <<"!\n";
           //map.deleteMap();
           //mobQueue.clear();
           //delete camera;
-          std::string address = "level" + std::to_string(sel) + "/level" + std::to_string(sel) + ".txt";
-          game_func::load(address, map, wintile, mobQueue, player, camera);
+          for (std::vector<int>::iterator it = scriptSavesId.begin(); it != scriptSavesId.end(); it++) {
+            if (*it == sel) {
+              isScriptFile = true;
+              break;
+            }
+          }
+          if (!isScriptFile) {
+            std::string address = "level" + std::to_string(sel) + "/level" + std::to_string(sel) + ".txt";
+            game_func::load(address, map, wintile, mobQueue, player, camera);
+          } else {
+            std::string address = "level" + std::to_string(sel) + "/level" + std::to_string(sel) + "m.txt";
+            game_func::readLevel(address, map, wintile, mobQueue, player, camera);
+          }
           game_func::setFormat(75);
           std::cout << "Load completed! Press any key to continue...";
           char c = getKeystroke();
@@ -247,7 +261,7 @@ void game_func::handleMainMenu(int levels, Map &map, WinTile *&wintile, std::vec
   }
 }
 
-void game_func::drawLevelSelectMenu(int level, std::vector<int> &existingLevelsId) {
+void game_func::drawLevelSelectMenu(int level, std::vector<int> &scriptSavesId, std::vector<int> &existingLevelsId) {
   std::string menuAddress = "menu/levelSelectMenu.txt";
   std::ofstream outFile(menuAddress);
   if (outFile.is_open()) {
@@ -261,7 +275,16 @@ void game_func::drawLevelSelectMenu(int level, std::vector<int> &existingLevelsI
         outFile << "exists!\n"; //change to time stamp?
         existingLevelsId.push_back(i);
       } else {
-        outFile << "empty!\n"; //change to time stamp?
+        //check if script file
+        std::string scriptAddress = "level" + std::to_string(i) + "/level" + std::to_string(i) + "m.txt";
+        std::ifstream temptwo(scriptAddress);
+        if (temptwo.good()) {
+          outFile << "exists!\n";
+          existingLevelsId.push_back(i);
+          scriptSavesId.push_back(i);
+        } else {
+          outFile << "empty!\n";
+        }
       }
       temp.close();
     }
@@ -348,7 +371,6 @@ void game_func::readLevel(std::string levelFile, Map &map, WinTile *&wintile, st
 
   std::ifstream fin;
   fin.open(levelFile.c_str());
-  std::cout << "opened file\n";
   std::string objectType;
 
   while (fin >> objectType) {
@@ -362,13 +384,11 @@ void game_func::readLevel(std::string levelFile, Map &map, WinTile *&wintile, st
       int px, py;
       fin >> n >> px >> py;
       p = new Player(n, px, py);
-      std::cout << "Player " << p << " created at " << p->pos.x << " " << p->pos.y << '\n';
       map.insertObject(p);
     } else if (objectType == "camera") {
       int l;
       fin >> l;
       c = new Camera(l, p->pos);
-      std::cout << "Camera with length " << l << " created at " << c->camera_pos.x << " " << c->camera_pos.y << '\n';
     } else if (objectType == "link") {
       // How to use link
       // in txt
@@ -382,12 +402,10 @@ void game_func::readLevel(std::string levelFile, Map &map, WinTile *&wintile, st
 
       fin >> n >> px >> py;
       PressurePlate *pp = new PressurePlate(px, py);
-      std::cout << "PressurePlate created at " << pp->pos.x << " " << pp->pos.y << '\n';
       map.insertObject(pp);
 
       fin >> n >> px >> py;
       Door *d = new Door(px, py);
-      std::cout << "Door created at " << d->pos.x << " " << d->pos.y << '\n';
       map.insertObject(d);
 
       pp->activateObj = d;
@@ -396,57 +414,48 @@ void game_func::readLevel(std::string levelFile, Map &map, WinTile *&wintile, st
       int px, py;
       fin >> px >> py;
       Door *d = new Door(px, py);
-      std::cout << "Door created at " << d->pos.x << " " << d->pos.y << '\n';
       map.insertObject(d);
     } else if (objectType == "pressureplate") {
       int px, py;
       fin >> px >> py;
       PressurePlate *pp = new PressurePlate(px, py);
-      std::cout << "PressurePlate created at " << pp->pos.x << " " << pp->pos.y << '\n';
       map.insertObject(pp);
     } else if (objectType == "rock") {
       int px, py;
       fin >> px >> py;
       Rock *r = new Rock(px, py);
-      std::cout << "Rock created at " << r->pos.x << " " << r->pos.y << '\n';
       map.insertObject(r);
     } else if (objectType == "wall") {
       bool isSideWall;
       int px, py;
       fin >> isSideWall >> px >> py;
       Wall *w = new Wall(isSideWall, px, py);
-      std::cout << "Wall created at " << w->pos.x << " " << w->pos.y << '\n';
       map.insertObject(w);
     } else if (objectType == "zombie") {
       int px, py;
       fin >> px >> py;
       Zombie *z = new Zombie(px, py);
-      std::cout << "Zombie created at " << z->pos.x << " " << z->pos.y << '\n';
       mobQueue.push_back(z);
       map.insertObject(z);
     } else if (objectType == "snake") {
       int px, py;
       fin >> px >> py;
       Snake *s = new Snake(p, px, py);
-      std::cout << "Snake created\n";
       mobQueue.push_back(s);
       map.insertObject(s);
     } else if (objectType == "wintile") {
       int px, py;
       fin >> px >> py;
       wintile = new WinTile(px, py);
-      std::cout << "WinTile created\n";
       map.insertObject(wintile);
     } else if (objectType == "infotile") {
       std::string address;
       int px, py;
       fin >> address >> px >> py;
       InfoTile *infotile = new InfoTile(address, px, py);
-      std::cout << "InfoTile created\n";
       map.insertObject(infotile);
     }
   }
-  std::cout << "Finished reading objects\n";
 }
 
 void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&player, Camera *&camera) {
@@ -572,7 +581,7 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
 void game_func::save(std::string address, Map map, Camera *c) {
   std::ofstream outFile(address);
   if (outFile.is_open()) {
-    outFile << map.getHeight() << ' ' << map.getWidth() << ' ' << map.getDepth() << '\n';
+    outFile << map.getWidth() << ' ' << map.getHeight() << ' ' << map.getDepth() << '\n';
     outFile << c->length << '\n';
     for (int i = 0; i < map.getHeight(); i++) {
       for (int j = 0; j < map.getWidth(); j++) {
@@ -662,7 +671,6 @@ void game_func::save(std::string address, Map map, Camera *c) {
 void game_func::load(std::string address, Map &map, WinTile *&win, std::vector<Moveable*> &mobQueue, Player *&p, Camera *&c) {
   std::ifstream inFile(address);
   p = new Player("empty", 0, 0); //so ugly :(
-
   if (inFile.is_open()) {
     int w, h, d, l;
     inFile >> w >> h >> d >> l;
@@ -729,7 +737,6 @@ void game_func::load(std::string address, Map &map, WinTile *&win, std::vector<M
                 Openable *op = dynamic_cast<Openable*>(map.getObject(activate));
                 if (op == nullptr) {
                   Object *topObj = map.removeObject(activate);
-                  op = static_cast<Openable*>(map.getObject(activate));
                   map.insertObject(topObj);
                 }
                 pp->activateObj = op;
@@ -747,9 +754,8 @@ void game_func::load(std::string address, Map &map, WinTile *&win, std::vector<M
                 d->activatorObj = nullptr;
               } else {
                 PressurePlate *ob = dynamic_cast<PressurePlate*>(map.getObject(activator));
-                if (ob ==nullptr) {
+                if (ob == nullptr) {
                   Object *topObj = map.removeObject(activator);
-                  ob = static_cast<PressurePlate*>(map.getObject(activator));
                   map.insertObject(topObj);
                 }
                 d->activatorObj = ob;

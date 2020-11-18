@@ -59,7 +59,7 @@ namespace game_func {
 
   void drawMainMenu();
   void handleMainMenu(int levels, Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&player, Camera *&camera);
-  void drawLevelSelectMenu(int levels, std::vector<int> &existingLevelsId);
+  void drawLevelSelectMenu(int levels, std::vector<int> &scriptSavesId, std::vector<int> &existingLevelsId);
 
   void menuLoop(game_func::menuFunctions &f);
   void mainMenuLoop(game_func::mainMenuFunctions &f);
