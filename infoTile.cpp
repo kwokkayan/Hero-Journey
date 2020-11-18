@@ -22,8 +22,8 @@ void InfoTile::process(Point p) {
   game_func::clrScr(100);
   std::cout << "The info tile reads:\n";
   std::cout << info;
-  std::cout << "Press enter to continue...";
-  getline(std::cin, s);
+  std::cout << "Press any key to continue...";
+  char temp = game_func::getKeystroke();
 }
 bool InfoTile::check(Object *o) {
 

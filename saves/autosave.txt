@@ -1,5 +1,5 @@
-9 30 5
-12
+8 10 5
+16
 3 1
 end
 2 0
@@ -14,55 +14,36 @@ end
 end
 2 0
 end
-2 0
-end
 3 1
 end
 3 1
 end
 1
-end
-1
-11 level1/level1info.txt
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
+11 level2/level2info.txt
 end
 1
 4 BOT 100 0 0
 end
 1
+3 1
 end
 1
 end
 1
+6 0 3 8
+end
+1
+2 0
 end
 3 1
 end
 3 1
 end
 1
+6 0 1 8
 end
 1
-end
-1
+5
 end
 1
 end
@@ -80,93 +61,6 @@ end
 2 0
 end
 1
-2 0
-end
-1
-2 0
-end
-1
-end
-1
-2 0
-end
-1
-2 0
-end
-1
-2 0
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-11 level1/level1room1.txt
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-2 0
-end
-1
-2 0
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-3 1
-end
-1
-end
-1
 end
 1
 end
@@ -175,170 +69,8 @@ end
 end
 1
 end
-3 1
-end
-3 1
-end
 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-2 0
-end
-1
-2 0
-end
-1
-2 0
-end
-1
-end
-1
-2 0
-end
-1
-2 0
-end
-1
-2 0
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-3 1
-end
-1
-11 level1/level1room2.txt
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-7 0 -1 -1
-end
-1
-end
-1
-end
-1
-6 0 6 12
-end
-1
-7 0 5 12
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-2 0
-end
-1
-2 0
-end
-1
-2 0
-end
-1
-end
-1
-2 0
-end
-1
-2 0
-end
-1
-2 0
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-11 level1/level1room3.txt
-end
-1
-end
-1
-3 1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-7 0 1 19
-end
-1
-end
-1
+6 0 5 8
 end
 3 1
 end
@@ -350,11 +82,9 @@ end
 5
 end
 1
-end
-1
-end
-1
 3 1
+end
+1
 end
 1
 end
@@ -363,10 +93,6 @@ end
 3 1
 end
 3 1
-end
-1
-end
-1
 end
 1
 end
@@ -378,15 +104,14 @@ end
 1
 end
 1
+2 0
+end
+1
+5
 end
 3 1
 end
 3 1
-end
-1
-6 0 5 16
-end
-1
 end
 1
 end
@@ -399,9 +124,13 @@ end
 end
 1
 end
+1
+end
 3 1
 end
 3 1
+end
+1
 end
 1
 2 0
@@ -418,174 +147,29 @@ end
 1
 2 0
 end
-1
-end
-1
-end
 3 1
 end
 3 1
 end
 1
+7 0 1 2
 end
 1
 end
 1
+7 0 5 1
 end
 1
 end
 1
-3 1
-end
-1
-end
-1
-11 level1/level1room4.txt
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-8
-end
-1
-end
-1
-end
-1
-3 1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-3 1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-9 5 4 2
-end
-1
-end
-1
-end
-1
-end
-1
-3 1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-3 1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-2 0
-end
-1
-2 0
-end
-1
-2 0
-end
-1
-2 0
-end
-1
-2 0
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
+7 0 6 3
 end
 1
 10 0
 end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-11 level1/level1room5.txt
-end
 3 1
 end
 3 1
-end
-2 0
 end
 2 0
 end

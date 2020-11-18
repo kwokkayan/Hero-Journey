@@ -31,6 +31,7 @@ int main(int argc, char* argv[]) {
     std::cout << isStoryMode;
     if (isStoryMode) {
       game_func::readScriptLevel("level1/level1m.txt", map, wintile, mobQueue, player, camera);
+      game_func::printCutScene(1);
     }
     if (player != nullptr)
       game_func::gameLoop(map, wintile, mobQueue, player, camera, isStoryMode, returnMainMenu);

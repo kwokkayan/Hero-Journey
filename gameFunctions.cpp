@@ -503,6 +503,7 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
         game_func::readScriptLevel(currlevelFile, map, wintile, mobQueue, player, camera);
         game_func::save("saves/autosave.txt", map, camera);
         //cutscene
+        game_func::printCutScene(currentlevel);
         continue;
       }
     }
@@ -842,4 +843,21 @@ void game_func::load(std::string address, Map &map, WinTile *&win, std::vector<M
       }
     }
   }
+}
+
+void game_func::printCutScene(int num) {
+  std::string address = "cutscenes/" + std::to_string(num) + ".txt";
+  std::ifstream inFile(address);
+  game_func::clrScr(6);
+  std::cout << "Cutscene " << num << "\n\n";
+  if (inFile.is_open()) {
+    std::string s;
+    while (getline(inFile, s))
+      std::cout << s << '\n';
+  } else {
+    std::cout << "cutscene " << num << " not created yet!";
+  }
+  std::cout << "\nPress any button to start...";
+  char temp = game_func::getKeystroke();
+  inFile.close();
 }
