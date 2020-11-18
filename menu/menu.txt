@@ -1,7 +1,8 @@
-30 6
+30 7
 Menu
 R: Restart Level
 S: Save Game
 L: Load Game
 Q: Leave Game
 H: Leave Menu
+M: Return to Main Menu

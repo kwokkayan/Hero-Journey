@@ -37,7 +37,8 @@ namespace game_func {
     SAVE,
     LOAD,
     LEAVEGAME,
-    LEAVEMENU
+    LEAVEMENU,
+    MAINMENU
   };
   enum class mainMenuFunctions {
     SELECT,
@@ -48,7 +49,8 @@ namespace game_func {
   void setFormat(int w);
   void detectGameControls(Player *p, Point &pos);
   void clrScr(int t);
-
+  void clearObjects(Map &map, std::vector<Moveable*> &mobQueue, Camera *&camera);
+  
   void drawUI(Player* p); //IOMANIP
   void drawMenu(std::string address); //all are in menu dir
 

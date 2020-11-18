@@ -52,7 +52,11 @@ void game_func::clrScr(int t) {
     std::cout << '\n';
   }
 }
-
+void game_func::clearObjects(Map &map, std::vector<Moveable*> &mobQueue, Camera *&camera) {
+  map.deleteMap();
+  mobQueue.clear();
+  delete camera;
+}
 void game_func::drawUI(Player* player) {
   player->printName();
   player->printHP();
@@ -354,6 +358,11 @@ void game_func::menuLoop(game_func::menuFunctions &f) {
         f = game_func::menuFunctions::LEAVEMENU;
         break;
       }
+      case 'M':
+      case 'm': {
+        f = game_func::menuFunctions::MAINMENU;
+        break;
+      }
       default:
         hasChosen = false;
     }
@@ -463,6 +472,7 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
   //initial load here
   bool hasQuitted = false;
   bool noUpdate = false;
+  bool returnMainMenu = false;
 
   game_func::save("saves/autosave.txt", map, camera);
 
@@ -525,9 +535,7 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
           if (sel != -1) {
             game_func::setFormat(55);
             std::cout << "You have chosen save " << std::to_string(sel) <<"!\n";
-            map.deleteMap();
-            mobQueue.clear();
-            delete camera;
+            game_func::clearObjects(map, mobQueue, camera);
             game_func::load("saves/save" + std::to_string(sel) + ".txt", map, wintile, mobQueue, player, camera);
             game_func::setFormat(75);
             std::cout << "Load completed! Press any key to continue...";
@@ -542,9 +550,17 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
         case game_func::menuFunctions::LEAVEMENU: {
           break;
         }
+        case game_func::menuFunctions::MAINMENU: {
+          returnMainMenu = true;
+          break;
+        }
       }
       if (hasQuitted)
         break;
+      if (returnMainMenu) {
+        game_func::clearObjects(map, mobQueue, camera);
+        game_func::handleMainMenu(6, map, wintile, mobQueue, player, camera); //CHANGE LEVEL NUM
+      }
       continue;
     }
 
