@@ -1,5 +1,6 @@
-8 10 5
-16
+20 20 5
+10
+0
 3 1
 end
 2 0
@@ -14,25 +15,28 @@ end
 end
 2 0
 end
-3 1
+2 0
 end
-3 1
+2 0
 end
-1
-11 level2/level2info.txt
+2 0
 end
-1
-4 BOT 100 0 0
+2 0
 end
-1
-3 1
+2 0
 end
-1
+2 0
 end
-1
-6 0 3 8
+2 0
 end
-1
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
 2 0
 end
 3 1
@@ -40,7 +44,420 @@ end
 3 1
 end
 1
-6 0 1 8
+6 0 15 18
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+6 0 17 18
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+7 0 -1 -1
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+7 0 -1 -1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+7 0 -1 -1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+5
+end
+1
+5
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
 end
 1
 5
@@ -50,39 +467,13 @@ end
 1
 end
 1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-2 0
-end
-1
-end
-1
-end
-1
-2 0
-end
-1
-end
-1
-6 0 5 8
-end
-3 1
-end
 3 1
 end
 1
 end
 1
-5
 end
 1
-3 1
 end
 1
 end
@@ -99,36 +490,10 @@ end
 1
 end
 1
-3 1
 end
 1
 end
 1
-2 0
-end
-1
-5
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-3 1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
 end
 1
 end
@@ -142,6 +507,149 @@ end
 2 0
 end
 1
+7 0 -1 -1
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+2 0
+end
+1
+end
+1
+2 0
+end
+1
+end
+1
+2 0
+end
+1
+end
+1
+2 0
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+2 0
+end
+1
 2 0
 end
 1
@@ -152,17 +660,178 @@ end
 3 1
 end
 1
-7 0 1 2
+end
+1
+2 0
 end
 1
 end
 1
-7 0 5 1
+2 0
+end
+1
+4 Bruce 50 0 0
+end
+1
+2 0
 end
 1
 end
 1
-7 0 6 3
+2 0
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+11 level6/startroom.txt
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+7 0 -1 -1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+2 0
+end
+1
+end
+1
+2 0
+end
+1
+end
+1
+2 0
+end
+1
+end
+1
+2 0
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+3 1
+end
+3 1
+end
+1
+6 0 16 18
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+7 0 1 1
+end
+1
+7 0 1 18
+end
+1
+7 0 18 1
 end
 1
 10 0
@@ -170,6 +839,30 @@ end
 3 1
 end
 3 1
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
+end
+2 0
 end
 2 0
 end

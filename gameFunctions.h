@@ -77,5 +77,6 @@ namespace game_func {
   void load(std::string address, Map &map, WinTile *&win, std::vector<Moveable*> &mobQueue, Player *&p, Camera *&c);
 
   void printCutScene(int num);
+  void selectDifficulty(Player *&player);
 }
 #endif

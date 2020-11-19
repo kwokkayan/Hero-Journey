@@ -54,6 +54,7 @@ end
 1
 end
 1
+3 1
 end
 1
 end
@@ -87,6 +88,372 @@ end
 1
 end
 1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+7 0 -1 -1
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+4 Bruce 100 0 0
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+2 0
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+5
+end
+1
+5
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+3 1
+end
+3 1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+end
+1
+3 1
+end
+1
+end
+1
 5
 end
 1
@@ -94,61 +461,7 @@ end
 1
 end
 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-5
-end
-1
-end
 3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
 end
 1
 end
@@ -179,296 +492,22 @@ end
 1
 end
 1
+2 0
 end
 1
+2 0
 end
 1
+2 0
 end
 1
+7 0 -1 -1
 end
 1
+2 0
 end
 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-3 1
-end
-3 1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
-end
-1
+2 0
 end
 1
 end
@@ -684,7 +723,6 @@ end
 7 0 -1 -1
 end
 1
-4 Bruce 100 0
 end
 1
 end
@@ -697,7 +735,6 @@ end
 1
 end
 1
-5
 end
 1
 end

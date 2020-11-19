@@ -1,0 +1,7 @@
+37 6
+Select Difficulty
+0: Easy (50 Health)
+1: Normal (25 Health)
+2: Hard (10 Health)
+3: Expert (1 Health)
+4: Funny (Random from 1 to 50)

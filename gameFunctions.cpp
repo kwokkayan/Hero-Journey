@@ -483,6 +483,7 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
   int currentlevel = 1; //for storymode
   bool hasQuitted = false;
   bool noUpdate = false;
+  int currentHealth = player->hp;
 
   game_func::save("saves/autosave.txt", map, camera);
   while (true) {
@@ -501,6 +502,7 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
         std::string currlevelFile = "level" + std::to_string(currentlevel) + "/level" + std::to_string(currentlevel) + "m.txt";
         game_func::clearObjects(map, mobQueue, camera);
         game_func::readScriptLevel(currlevelFile, map, wintile, mobQueue, player, camera);
+        player->hp = currentHealth;
         game_func::save("saves/autosave.txt", map, camera);
         //cutscene
         game_func::printCutScene(currentlevel);
@@ -607,6 +609,7 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
       (*it)->move(map);
       (*it)->dealDmg(player);
       map.updateMap((*it)->pos, 3);
+      currentHealth = player->hp;
     }
     game_func::clrScr(30); //clear the screen
   }
@@ -860,4 +863,37 @@ void game_func::printCutScene(int num) {
   std::cout << "\nPress any button to start...";
   char temp = game_func::getKeystroke();
   inFile.close();
+}
+void game_func::selectDifficulty(Player *&player) {
+  game_func::drawMenu("menu/difficultyMenu.txt");
+  bool selectedValid = false;
+  while (!selectedValid) {
+    selectedValid = true;
+    char sel = game_func::getKeystroke();
+    switch (sel) {
+      case '0': {
+        player->hp = 50;
+        break;
+      }
+      case '1': {
+        player->hp = 25;
+        break;
+      }
+      case '2': {
+        player->hp = 10;
+        break;
+      }
+      case '3': {
+        player->hp = 1;
+        break;
+      }
+      case '4': {
+        player->hp = rand() % 50 + 1;
+        break;
+      }
+      default : {
+        selectedValid = false;
+      }
+    }
+  }
 }

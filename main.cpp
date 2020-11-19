@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
   WinTile *wintile = nullptr;
   std::vector<Moveable*> mobQueue;
   bool isStoryMode, returnMainMenu;
-  //editor::createLevel("level6/level6.txt", map, wintile, mobQueue, player, camera);
+  editor::createLevel("level6/level6.txt", map, wintile, mobQueue, player, camera);
   //game_func::readScriptLevel("level5/level5.txt", map, wintile, mobQueue, player, camera);
   do {
     player = nullptr;
@@ -33,7 +33,10 @@ int main(int argc, char* argv[]) {
       game_func::readScriptLevel("level1/level1m.txt", map, wintile, mobQueue, player, camera);
       game_func::printCutScene(1);
     }
-    if (player != nullptr)
+    if (player != nullptr) {
+      //select difficulty
+      game_func::selectDifficulty(player);
       game_func::gameLoop(map, wintile, mobQueue, player, camera, isStoryMode, returnMainMenu);
+    }
   } while (returnMainMenu);
 }
