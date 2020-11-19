@@ -1,9 +1,8 @@
-30 8
+30 7
 Level Select Menu
 Level 1 : exists!
 Level 2 : exists!
 Level 3 : exists!
 Level 4 : exists!
-Level 5 : empty!
-Level 6 : exists!
+Level 5 : exists!
 Q: Exit

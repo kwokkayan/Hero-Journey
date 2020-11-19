@@ -72,11 +72,12 @@ void game_func::clearObjects(Map &map, std::vector<Moveable*> &mobQueue, Camera 
   mobQueue.clear();
   delete camera;
 }
-// This prints game information for the player
+// This prints game information for the player and other information
 void game_func::drawUI(Player* player) {
   player->printName();
   player->printHP();
   player->printXY();
+  std::cout << "Press H/h for the game menu\n";
 }
 // This draws the different menus of the game defined by the txt address of the menus,
 // which is stored by the parameter address.
@@ -583,7 +584,7 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
         game_func::printWinScreen();
         returnMainMenu = true;
         break;
-      } else if (currentlevel == 4) { //change to 5!!!!!!
+      } else if (currentlevel == 5) {
         //print final cutscreen
         game_func::printWinScreen();
         returnMainMenu = true;

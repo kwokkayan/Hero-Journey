@@ -43,9 +43,10 @@ int main() {
     player = nullptr;
     isStoryMode = false;
     returnMainMenu = false; //for second loop
-    game_func::handleMainMenu(6, map, wintile, mobQueue, player, camera, isStoryMode);
+    game_func::handleMainMenu(5, map, wintile, mobQueue, player, camera, isStoryMode);
     if (player != nullptr) {
       game_func::gameLoop(map, wintile, mobQueue, player, camera, isStoryMode, returnMainMenu);
+      game_func::clearObjects(map, mobQueue, camera); // cautionary clearing
     }
   } while (returnMainMenu);
 }
