@@ -1,5 +1,5 @@
 map 8 10
-player BOT 2 1
+player Hero 2 1
 camera 16
 link
 pressureplate 1 2

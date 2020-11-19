@@ -1,5 +1,5 @@
 map 21 21
-player BOT 2 2
+player Hero 2 2
 camera 15
 infotile level4/level4info.txt 4 1
 infotile level4/level4room1.txt 6 1

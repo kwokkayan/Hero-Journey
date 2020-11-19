@@ -1,6 +1,6 @@
 map 31 31
-player bot 1 13
-camera 14
+player Hero 1 13
+camera 12
 link
 pressureplate 29 29
 door 24 14
