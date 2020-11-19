@@ -1,4 +1,7 @@
-//#include "baseClasses.h"
+// Filename: gameFunctions.h
+// Description: Program that declares functions and enums for the game_func namespace
+//              Comments of the functions are in gameFunctions.cpp.
+// Last Changed: 19 Nov, 2020
 #include <vector>
 #include <iostream>
 #include <cstdlib>
@@ -32,6 +35,7 @@
 #ifndef GAMEFUNCTIONS_H
 #define GAMEFUNCTIONS_H
 namespace game_func {
+  // Used in switch cases for detecting in-game menu inputs and executing the according instructions
   enum class menuFunctions {
     RESTART,
     SAVE,
@@ -40,6 +44,7 @@ namespace game_func {
     LEAVEMENU,
     MAINMENU
   };
+  // Used in switch cases for detecting main menu inputs and executing the according instructions
   enum class mainMenuFunctions {
     STORY,
     SELECT,
@@ -67,8 +72,8 @@ namespace game_func {
   void menuLoop(game_func::menuFunctions &f);
   void mainMenuLoop(game_func::mainMenuFunctions &f);
 
-  void printLoseScreen(); //IOMANIP
-  void printWinScreen();  //IOMANIP
+  void printLoseScreen();
+  void printWinScreen();
 
   void readScriptLevel(std::string levelFile, Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&p, Camera *&c);
   void gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&player, Camera *&camera, bool &isStoryMode, bool &returnMainMenu);

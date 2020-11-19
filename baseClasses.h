@@ -1,10 +1,6 @@
-// Filename: thingsClasses.h
-// Description: Header file for thingsClasses, stores declarations for object-related classes
-// Last Changed: 5 Nov, 2020
-
-// *********************************
-// TODO: REFACTOR THE CODE ARRRRRRRR
-// *********************************
+// Filename: baseClasses.h
+// Description: Header that declares the enums and base classes.
+// Last Changed: 19 Nov, 2020
 #include <vector>
 
 #ifndef BASECLASSES_H
@@ -66,9 +62,10 @@
       Object(); //create an empty object (the void)
       Object(int px, int py); //create an empty object at x, y
       Object(ObjectId Id, ObjectIcon Icon, int px, int py);
-      virtual void process(Point p);
-      virtual bool check(Object *o); //used for checking the next object 0 for ok 1 for not ok 2 for further check
-      virtual bool isValid();
-      virtual void draw();
+      // All object can implement these functions
+      virtual void process(Point p); // Used for processing the object after player or mob movement
+      virtual bool check(Object *o); // Used for checking valid movement for player and mobs
+      virtual bool isValid(); // Used for checking whether the object is a valid spot to move to
+      virtual void draw(); // Used for drawing the object
   };
 #endif

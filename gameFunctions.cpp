@@ -1,70 +1,94 @@
 #include "gameFunctions.h"
-
+// getKeystroke() detects keyboard input (one character) without needing to press enter
+// by use of system()
+// the character is returned
 char game_func::getKeystroke() {
   char in;
-  std::system("stty raw");
+  std::system("stty raw"); //seting the console not require ending input with enter
   std::cin >> in;
-  std::system("stty cooked");
+  std::system("stty cooked"); //reseting the console to default
   std::cout << '\n';
   return in;
 }
-
+// setFormat(int w) right aligns the line of output
+// w is the number of characters that are right aligned
 void game_func::setFormat(int w) {
   std::cout << std::right << std::setw(w);
 }
 
+// This detects the game input for the player and modifies pos,
+// which is the potential new position of the player,
+// unless H/h is pressed. If so, the menu is instead opened.
 void game_func::detectGameControls(Player *p, Point &pos) {
-  char input = game_func::getKeystroke();
-  pos = p->pos;
+  char input = game_func::getKeystroke(); // getting the input
+  pos = p->pos; // pos is set to player position
+  // W A S D is the movement keys of the player
+  //  -W is up
+  //  -A is left
+  //  -S is down
+  //  -D is right
+  // H opens the menu and therefore pos is set to an invalid value
+  // the switch statement defines the changes of pos according to input.
+  // If invalid input, a different invalid value is set.
   switch (input) {
     case 'W':
     case 'w': {
-      --pos.y;
+      --pos.y; //above player
       break;
     }
     case 'A':
     case 'a': {
-      --pos.x;
+      --pos.x; //left to player
       break;
     }
     case 'S':
     case 's': {
-      ++pos.y;
+      ++pos.y; //below player
       break;
     }
     case 'D':
     case 'd': {
-      ++pos.x;
+      ++pos.x; //right to player
       break;
     }
     case 'H':
     case 'h': {
-      pos = Point(-2, -2);
+      pos = Point(-2, -2); //open menu
       break;
     }
     default:
-      pos = Point(); //return -1 for illegal input
+      pos = Point(); //return -1, -1 for illegal input
   }
 }
-
+// This clears the screen by printing \n for t times.
 void game_func::clrScr(int t) {
   for (int i = 0; i < t; i++) {
     std::cout << '\n';
   }
 }
+// This erase the data of all object, mobQueue, and camera
 void game_func::clearObjects(Map &map, std::vector<Moveable*> &mobQueue, Camera *&camera) {
   map.deleteMap();
   mobQueue.clear();
   delete camera;
 }
+// This prints game information for the player
 void game_func::drawUI(Player* player) {
   player->printName();
   player->printHP();
   player->printXY();
 }
-
+// This draws the different menus of the game defined by the txt address of the menus,
+// which is stored by the parameter address.
+// With the address, data of the menu is inputted via file I/O.
+// ==========================================
+// Sample menu txt (comments are in brackets):
+// 30 3 (30 is the right align width of the menu, 3 is the lines of text in the menu)
+// Sample Menu (1st line)
+// Text 1 (2nd line)
+// Text 2 (3rd line)
 void game_func::drawMenu(std::string address) { //draws menu
-  int width, height;
+  int width, height; //these store the first 2 file inputs
   std::ifstream inFile(address);
   if (inFile.is_open()) {
     inFile >> width >> height;
@@ -73,12 +97,13 @@ void game_func::drawMenu(std::string address) { //draws menu
     game_func::clrScr(20);
 
     game_func::setFormat(width);
-    for (int k = 0; k < width + 2; k++)
+    for (int k = 0; k < width + 2; k++) // Prints the top box container of the menu
       std::cout << '~';
     std::cout << '\n';
 
+    // This prints each line of output according to the txt
+    // The output is centered by printing spaces before and after the text.
     for (int i = 0; i < height; i++) {
-
       getline(inFile, s);
       int bufferleft = (width - s.length()) / 2;
       game_func::setFormat(width);
@@ -92,17 +117,21 @@ void game_func::drawMenu(std::string address) { //draws menu
         std::cout << ' ';
       }
       std::cout << "~\n";
-
     }
 
     game_func::setFormat(width);
-    for (int k = 0; k < width + 2; k++)
+    for (int k = 0; k < width + 2; k++) // Prints the bottom box container of the menu
       std::cout << '~';
     std::cout << '\n';
   } else std::cout << "Menu not found!\n";
   inFile.close();
 }
-
+// This handles the inputs for the save menu
+// options stores the save id for existing saves.
+// When the player selects those saves, they will be prompted to confirm the selection,
+// since they new save would overwrite the existing one.
+// sel stores the selection of the save.
+// if q is inputted the operation would be aborted.
 void game_func::selectSlotToSave(std::vector<int> options, int &sel) {
   bool hasSelectedValid = false;
   while (!hasSelectedValid) {
@@ -114,7 +143,7 @@ void game_func::selectSlotToSave(std::vector<int> options, int &sel) {
       sel = in - 48;
     }
 
-    for (std::vector<int>::iterator it = options.begin(); it != options.end(); it++) {
+    for (std::vector<int>::iterator it = options.begin(); it != options.end(); it++) { // linear search for checking existing saves
       if (in - 48 == *it) {
         setFormat(40);
         std::cout << "Chosen file will be overwritten! Press c/C to confirm.";
@@ -128,14 +157,17 @@ void game_func::selectSlotToSave(std::vector<int> options, int &sel) {
     }
   }
 }
-
+// This handles the inputs for the load menu
+// options stores the save id for existing saves, which can only be chosen.
+// sel stores the selection of the existing save.
+// if q is inputted the operation would be aborted.
 void game_func::selectSlotToLoad(std::vector<int> options, int &sel) {
   bool hasSelectedValid = false;
   while (!hasSelectedValid) {
     char in = game_func::getKeystroke();
     if (in == 'q' || in == 'Q')
       break;
-    for (std::vector<int>::iterator it = options.begin(); it != options.end(); it++) {
+    for (std::vector<int>::iterator it = options.begin(); it != options.end(); it++) { // linear search for checking existing saves
       if (in - 48 == *it) {
         hasSelectedValid = true;
         sel = *it;
@@ -143,7 +175,13 @@ void game_func::selectSlotToLoad(std::vector<int> options, int &sel) {
     }
   }
 }
-
+// This draws the save menu.
+// First, the saveMenu.txt is opened and being overwritten.
+// Then, By checking the existance of save files, it writes the correct state into the txt.
+// I.e. 1: exists! if save1.txt exists
+//      0: empty! otherwise
+// existingSavesId is updated accordingly.
+// After the saveMenu.txt is overwritten, drawMenu is called with the correct address
 void game_func::drawSaveMenu(std::vector<int> &existingSavesId) {
   std::string menuAddress = "menu/saveMenu.txt";
   std::string saveDir = "saves/";
@@ -151,11 +189,11 @@ void game_func::drawSaveMenu(std::vector<int> &existingSavesId) {
   if (outFile.is_open()) {
     outFile << 30 << ' ' << 12 << '\n';
     outFile << "Save Menu\n";
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++) { // linear search for existance of save files
       std::ifstream temp(saveDir + "save" + std::to_string(i) + ".txt");
       outFile << i << ": ";
-      if (temp.good()) {
-        outFile << "exists!\n";//change to time stamp?
+      if (temp.good()) { // checks if the file exists (by opening it)
+        outFile << "exists!\n";
         existingSavesId.push_back(i);
       } else {
         outFile << "empty!\n";
@@ -167,7 +205,12 @@ void game_func::drawSaveMenu(std::vector<int> &existingSavesId) {
   outFile.close();
   game_func::drawMenu(menuAddress);
 }
-
+// This draws the load menu.
+// First, the loadMenu.txt is opened and being overwritten.
+// Then, By checking the existance of save files, it writes the correct state into the txt.
+// I.e. 1: exists! if save1.txt exists, and empty otherwise
+// existingSavesId is updated accordingly.
+// After the loadMenu.txt is overwritten, drawMenu is called with the correct address
 void game_func::drawLoadMenu(std::vector<int> &existingSavesId) {
   std::string menuAddress = "menu/loadMenu.txt";
   std::string saveDir = "saves/";
@@ -175,11 +218,11 @@ void game_func::drawLoadMenu(std::vector<int> &existingSavesId) {
   if (outFile.is_open()) {
     outFile << 30 << ' ' << 12 << '\n';
     outFile << "Load Menu\n";
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++) { // linear search for existance of save files
       std::ifstream temp(saveDir + "save" + std::to_string(i) + ".txt");
-      if (temp.good()) {
+      if (temp.good()) { // checks if the file exists (by opening it)
         outFile << i << ": ";
-        outFile << "exists!\n";//change to time stamp?
+        outFile << "exists!\n";
         existingSavesId.push_back(i);
       }
       temp.close();
@@ -189,20 +232,33 @@ void game_func::drawLoadMenu(std::vector<int> &existingSavesId) {
   outFile.close();
   game_func::drawMenu(menuAddress);
 }
-
+// This draws the main menu by calling drawMenu with the corresponding address.
 void game_func::drawMainMenu() {
   game_func::drawMenu("menu/mainMenu.txt");
 }
-
+// This handles the operations of the main menu.
+// There are four functions:
+//  1. Story mode: starts the game in story mode, with cutscenes and sequential play
+//  2. Level Selection: lets players to play individual levels separately
+//  3. Load save: lets players to play previous saves
+//  4. Leave Game: quits the game
+// For functions 1 to 3, the corresponding levels will be loaded,
+// which would alter map, wintile, mobQueue, player, camera and isStoryMode.
 void game_func::handleMainMenu(int levels, Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&player, Camera *&camera, bool &isStoryMode) {
+  // functionFlag stores the inputed function's enum for use in switch cases
+  // loadedLevel is true when a level is stored
+  // hasQuitted is true when the player quits the game
   game_func::mainMenuFunctions functionFlag;
   bool loadedLevel = false;
   bool hasQuitted = false;
-  while (!(loadedLevel || hasQuitted || isStoryMode)) {
+  while (!(loadedLevel || hasQuitted || isStoryMode)) { // By use of De Morgan's law, the loop continues until a level is loaded, the player quits the game, or story mode is enabled.
     game_func::drawMainMenu();
     game_func::mainMenuLoop(functionFlag);
-    switch (functionFlag) {
+    switch (functionFlag) { // switch case to execute the correct functions
       case game_func::mainMenuFunctions::STORY: {
+        game_func::readScriptLevel("level1/level1m.txt", map, wintile, mobQueue, player, camera);
+        game_func::selectDifficulty(player);
+        game_func::printCutScene(1);
         isStoryMode = true;
         break;
       }
@@ -215,12 +271,9 @@ void game_func::handleMainMenu(int levels, Map &map, WinTile *&wintile, std::vec
 
         int sel = -1;
         game_func::selectSlotToLoad(existingSavesId, sel);
-        if (sel != -1) {
+        if (sel != -1) { // checks whether a valid level is selected
           game_func::setFormat(55);
           std::cout << "You have chosen level " << std::to_string(sel) <<"!\n";
-          //map.deleteMap();
-          //mobQueue.clear();
-          //delete camera;
           for (std::vector<int>::iterator it = scriptSavesId.begin(); it != scriptSavesId.end(); it++) {
             if (*it == sel) {
               isScriptFile = true;
@@ -237,6 +290,7 @@ void game_func::handleMainMenu(int levels, Map &map, WinTile *&wintile, std::vec
           game_func::setFormat(75);
           std::cout << "Load completed! Press any key to continue...";
           char c = getKeystroke();
+          game_func::selectDifficulty(player);
           loadedLevel = true;
         }
         break;
@@ -250,9 +304,6 @@ void game_func::handleMainMenu(int levels, Map &map, WinTile *&wintile, std::vec
         if (sel != -1) {
           game_func::setFormat(55);
           std::cout << "You have chosen save " << std::to_string(sel) <<"!\n";
-          //map.deleteMap();
-          //mobQueue.clear();
-          //delete camera;
           game_func::load("saves/save" + std::to_string(sel) + ".txt", map, wintile, mobQueue, player, camera);
           game_func::setFormat(75);
           std::cout << "Load completed! Press any key to continue...";
@@ -269,22 +320,29 @@ void game_func::handleMainMenu(int levels, Map &map, WinTile *&wintile, std::vec
     }
   }
 }
-
+// This draws the level select menu.
+// Level stores the number of levels (from 1 to level)
+// scriptSavesId stores the levels that are written in script format
+// existingLevelsId stores levels that exist
+// The menu is constructed in a similar way to save and load menus.
+// First, the txt is opened.
+// Then by checking whether the file exists (in script format or save format),
+// the addresses are pushed into the corresponding vectors.
+// After the menu txt is written, it is passed to drawMenu.
 void game_func::drawLevelSelectMenu(int level, std::vector<int> &scriptSavesId, std::vector<int> &existingLevelsId) {
   std::string menuAddress = "menu/levelSelectMenu.txt";
   std::ofstream outFile(menuAddress);
   if (outFile.is_open()) {
     outFile << 30 << ' ' << level + 2 << '\n';
     outFile << "Level Select Menu\n";
-    for (int i = 1; i <= level; i++) {
+    for (int i = 1; i <= level; i++) { // linear search to check whether the files exist
       std::string address = "level" + std::to_string(i) + "/level" + std::to_string(i) + ".txt";
       outFile << "Level " << i << " : ";
       std::ifstream temp(address);
-      if (temp.good()) {
-        outFile << "exists!\n"; //change to time stamp?
+      if (temp.good()) { // this checks whether the file exists (in script format or save format)
+        outFile << "exists!\n";
         existingLevelsId.push_back(i);
       } else {
-        //check if script file
         std::string scriptAddress = "level" + std::to_string(i) + "/level" + std::to_string(i) + "m.txt";
         std::ifstream temptwo(scriptAddress);
         if (temptwo.good()) {
@@ -302,7 +360,9 @@ void game_func::drawLevelSelectMenu(int level, std::vector<int> &scriptSavesId, 
   outFile.close();
   game_func::drawMenu(menuAddress);
 }
-
+// This handles the input for the main menu.
+// When the user inputs the corresponding key, the corresponding function enum will be set,
+// where it is stored in f.
 void game_func::mainMenuLoop(game_func::mainMenuFunctions &f) {
   char input = ' ';
   bool hasChosen = false;
@@ -335,7 +395,9 @@ void game_func::mainMenuLoop(game_func::mainMenuFunctions &f) {
     }
   }
 }
-
+// This handles the input for the in-game menu.
+// When the user inputs the corresponding key, the corresponding function enum will be set,
+// where it is stored in f.
 void game_func::menuLoop(game_func::menuFunctions &f) {
   char input = ' ';
   bool hasChosen = false;
@@ -378,14 +440,33 @@ void game_func::menuLoop(game_func::menuFunctions &f) {
     }
   }
 }
-
+// This prints the lose screen, when the lose condition is met
 void game_func::printLoseScreen() {
   std::cout << "You have died! :(\n";
+  std::cout << "Press any button to return to main menu!";
+  char temp = game_func::getKeystroke();
 }
+// This prints the win screen, when the win conditions are met
 void game_func::printWinScreen() {
   std::cout << "You win!\n";
+  std::cout << "Press any button to return to main menu!";
+  char temp = game_func::getKeystroke();
 }
-//Long's function
+// This reads the level in scripted format
+// The file is formated in this way:
+// ...
+// <Object Type> <Object Parameters> <x position> <y position>
+// ...
+// ==========================================================
+// One special case is linking the pressureplate to a door.
+// Then, the following order must be observed.
+// ...
+// link
+// pressureplate <x position> <y position>
+// door <x position> <y position>
+// ...
+// ==========================================================
+// the game variables will be set accordingly.
 void game_func::readScriptLevel(std::string levelFile, Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&p, Camera *&c) {
 
   std::ifstream fin;
@@ -393,7 +474,6 @@ void game_func::readScriptLevel(std::string levelFile, Map &map, WinTile *&winti
   std::string objectType;
 
   while (fin >> objectType) {
-    //bool linking = false;
     if (objectType == "map") {
       int width, height, depth = 5;
       fin >> width >> height;
@@ -408,14 +488,7 @@ void game_func::readScriptLevel(std::string levelFile, Map &map, WinTile *&winti
       int l;
       fin >> l;
       c = new Camera(l, p->pos);
-    } else if (objectType == "link") {
-      // How to use link
-      // in txt
-      // ...
-      // link
-      // *PressurePlate Declaration*
-      // *Door Declaration* //change to declare openable
-      // ...
+    } else if (objectType == "link") { //The special case!
       std::string n;
       int px, py;
 
@@ -476,7 +549,23 @@ void game_func::readScriptLevel(std::string levelFile, Map &map, WinTile *&winti
     }
   }
 }
-
+// This is the mainloop of the program. Handles the game, most menus and executing menu functions.
+// in each iteration, the following will be executed:
+//   1. Game information like health is displayed
+//   2. The camera is displayed
+//   3. The winning conditions will be checked
+//     3.1. If winning conditions met, then execute the corresponding functions according to gamemode and levels
+//   4. The losing codition will be checked
+//     4.1. If losing conditions met, the game will be aborted and return to main menu
+//   5. The game inputs are detected (W A S D H)
+//   6. If H is inputted, open the menu and start the menu loop.
+//     6.1 Detect menu input and execute the corresponding functions
+//        (Restart, Save, Load, Quit Game, Quit Menu, Return to Main Menu)
+//   7. Movement is checked and the gamestate is updated if it is valid
+//   8. MobQueue, which stores all mobs, is processed:
+//     8.1 if the mob is flagged for destruction, it is removed from the game, and the loop moves to the next
+//     8.2 Mob moves and the gamestate is updated
+//   9. The console is cleared for the next iteration
 void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&player, Camera *&camera, bool &isStoryMode, bool &returnMainMenu) {
   Point newP = Point();
   //initial load here
@@ -489,13 +578,15 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
   while (true) {
     game_func::drawUI(player);
     camera->draw(map);
-    if (wintile->hasWon) {
+    if (wintile->hasWon) { //Wining condition
       if (!isStoryMode) {
         game_func::printWinScreen();
+        returnMainMenu = true;
         break;
       } else if (currentlevel == 4) { //change to 5!!!!!!
         //print final cutscreen
         game_func::printWinScreen();
+        returnMainMenu = true;
         break;
       } else {
         ++currentlevel;
@@ -504,18 +595,18 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
         game_func::readScriptLevel(currlevelFile, map, wintile, mobQueue, player, camera);
         player->hp = currentHealth;
         game_func::save("saves/autosave.txt", map, camera);
-        //cutscene
         game_func::printCutScene(currentlevel);
         continue;
       }
     }
-    if (player->hp <= 0) {   //Losing condition
+    if (player->hp <= 0) { // Losing condition
       game_func::printLoseScreen();
+      returnMainMenu = true;
       break;
     }
 
-    game_func::detectGameControls(player, newP); //change to pass by reference
-    if (newP.equalsTo(-2, -2)) { //open menu
+    game_func::detectGameControls(player, newP);
+    if (newP.equalsTo(-2, -2)) { // Opening the menu
       game_func::drawMenu("menu/menu.txt");
       game_func::menuFunctions selection;
       game_func::menuLoop(selection);
@@ -534,10 +625,7 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
         }
         case game_func::menuFunctions::SAVE: {
           std::vector<int> existingSavesId;
-          game_func::drawSaveMenu(existingSavesId);
-
-          //std::cout << "Please input savefile name (if exists it will be overwritten!): ";
-          //std::cin >> address;
+          game_func::drawSaveMenu(existingSavesId);;
           int sel = -1;
           selectSlotToSave(existingSavesId, sel);
           if (sel != -1) {
@@ -553,7 +641,6 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
         case game_func::menuFunctions::LOAD: {
           std::vector<int> existingSavesId;
           game_func::drawLoadMenu(existingSavesId);
-
           int sel = -1;
           selectSlotToLoad(existingSavesId, sel);
           if (sel != -1) {
@@ -585,25 +672,19 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
     }
 
     if (!newP.equalsTo(-1, -1) && player->check(newP, map)) {
-      camera->camera_pos = player->pos; //CHANGE THIS
+      camera->camera_pos = player->pos;
       map.updateMap(player->pos, 3);
     }
     for (std::vector<Moveable*>::iterator it = mobQueue.begin(); it != mobQueue.end(); it++) {
       if ((*it)->destroyFlag) {
-        //do some crazy shit
         Object *target = map.removeObject((*it)->pos);
         if (target->id != (*it)->id) {
-          Object *realTarget = map.removeObject((*it)->pos); //only one layer?
+          Object *realTarget = map.removeObject((*it)->pos);
           map.insertObject(target);
           target = realTarget;
         }
-
-        //camera->draw(map);
-        //std::cout << target <<'\n';
-
         mobQueue.erase(it);
-        delete target; //delete second obj
-        //std::cout << target;
+        delete target;
         break;
       }
       (*it)->move(map);
@@ -614,7 +695,18 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
     game_func::clrScr(30); //clear the screen
   }
 }
-
+// This saves the gamestate to the a save file with the address.
+// The save file starts from 0, 0 to mapwidth - 1, mapheight -1
+// The save file is formatted as follows:
+// <map width> <map height> <map depth>
+// <camera length>
+// <Object id> <Object parameters>
+// end
+// ...
+// =====================================
+// For pressureplates and doors, the line will be as follows:
+// <Object id> <Object parameters> <door/pressureplate x pos> <door/pressureplate y pos>
+// end
 void game_func::save(std::string address, Map map, Camera *c) {
   std::ofstream outFile(address);
   if (outFile.is_open()) {
@@ -704,7 +796,7 @@ void game_func::save(std::string address, Map map, Camera *c) {
     outFile.close();
   } else std::cout << "Failed to open!";
 }
-
+// This loads the gamestate from a save file
 void game_func::load(std::string address, Map &map, WinTile *&win, std::vector<Moveable*> &mobQueue, Player *&p, Camera *&c) {
   std::ifstream inFile(address);
   p = new Player("empty", 0, 0); //so ugly :(
