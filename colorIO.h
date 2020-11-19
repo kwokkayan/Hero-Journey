@@ -1,6 +1,14 @@
+// Filename: colorIO.h
+// Description: Header that declares frontground color codes, background color codes, modifyer codes, and color text function.
+// Last Changed: 19 Nov, 2020
 #ifndef COLORIO_H
 #define COLORIO_H
-  enum class FGCode { //30.. 37
+  // color codes are taken from the following wiki article:
+  // https://en.wikipedia.org/wiki/ANSI_escape_code
+  // FGCode enum defines the frontground color code
+  // BGCode enum defines the background color code
+  // Modifyer enum defines the modifyer codes
+  enum class FGCode {
     BLACK = 30,
     RED,
     GREEN,

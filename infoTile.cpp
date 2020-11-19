@@ -1,10 +1,15 @@
+// Filename: infoTile.cpp
+// Description: Program that implements the infoTile class.
+// Last Changed: 19 Nov, 2020
 #include <iostream>
 #include <fstream>
 
 #include "infoTile.h"
 #include "gameFunctions.h"
 #include "colorIO.h"
-
+// Constructor for InfoTile
+// The file given by address is opened and the text is stored in a string
+// for later use.
 InfoTile::InfoTile(std::string a, int px, int py) : Object (ObjectId::INFOTILE, ObjectIcon::INFOTILE, px, py) {
   info = "";
   address = a;
@@ -17,6 +22,7 @@ InfoTile::InfoTile(std::string a, int px, int py) : Object (ObjectId::INFOTILE, 
     }
   }
 }
+// This function prints the infomation when the player steps on the tile
 void InfoTile::process(Point p) {
   std::string s;
   game_func::clrScr(100);
@@ -28,6 +34,7 @@ void InfoTile::process(Point p) {
 bool InfoTile::check(Object *o) {
 
 }
+// Player can step on infotile
 bool InfoTile::isValid() {
   return true;
 }
