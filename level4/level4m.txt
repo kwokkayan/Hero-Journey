@@ -48,20 +48,21 @@ rock 6 5
 rock 5 4
 rock 5 6
 zombie 5 5
+zombie 1 5
+zombie 9 5
 pressureplate 1 1
 pressureplate 1 9
 pressureplate 9 1
 link
 pressureplate 9 9
 door 5 10
-wall 0 3 12
-wall 0 4 12
-wall 0 5 12
-wall 0 6 12
-wall 0 7 12
-wall 0 8 12
-wall 0 9 12
-wall 1 3 13
+wall 0 3 13
+wall 0 4 13
+wall 0 5 13
+wall 0 6 13
+wall 0 7 13
+wall 0 8 13
+wall 0 9 13
 wall 1 3 14
 wall 1 3 15
 wall 1 3 16
@@ -70,9 +71,9 @@ wall 1 6 19
 wall 1 6 18
 wall 1 6 17
 wall 1 6 16
-wall 1 6 15
-wall 0 7 16
+wall 0 7 15
 wall 0 9 18
+rock 8 12
 zombie 1 19
 zombie 9 15
 zombie 4 13
@@ -85,8 +86,16 @@ link
 pressureplate 15 16
 door 15 10
 snake 19 19
-snake 19 1
-snake 18 1
 snake 17 1
-snake 19 2
 snake 19 3
+snake 14 3
+wall 0 11 3
+wall 0 12 3
+wall 0 13 3
+wall 0 17 5
+wall 0 18 5
+wall 0 19 5
+wall 0 11 7
+wall 0 12 7
+wall 0 13 7
+rock 18 8

@@ -11,6 +11,7 @@ zombie 2 26
 zombie 26 11
 zombie 8 16
 zombie 8 23
+zombie 24 29
 snake 28 5
 wall 0 12 12
 wall 0 13 12
@@ -134,7 +135,6 @@ wall 1 9 11
 wall 1 24 11
 wall 0 1 12
 wall 0 2 12
-wall 0 3 12
 wall 0 6 12
 wall 0 7 12
 wall 0 8 12
@@ -151,7 +151,6 @@ wall 0 2 15
 wall 0 3 15
 wall 0 4 15
 wall 0 5 15
-wall 0 6 15
 wall 1 9 15
 wall 1 24 15
 wall 0 27 15
@@ -161,7 +160,6 @@ wall 1 9 16
 wall 1 24 16
 wall 1 9 17
 wall 1 24 17
-wall 0 3 18
 wall 0 4 18
 wall 0 5 18
 wall 0 6 18
@@ -241,9 +239,12 @@ rock 3 23
 rock 6 25
 rock 5 26
 rock 4 28
+rock 2 24
 wall 1 21 2
 link
 pressureplate 5 1
 door 21 1
 wall 0 28 9
 door 29 9
+zombie 21 29
+zombie 25 25

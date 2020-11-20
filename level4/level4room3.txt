@@ -1,2 +1,3 @@
-Unlock the door with the pressure plate!
-Hint: observe the snake's movements!
+Room 3:
+Unlock the door!
+Hint: Observe the snake's movements and lure it to the pressure plate!
