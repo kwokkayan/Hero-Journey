@@ -1,4 +1,4 @@
-# Untitled Role-playing Puzzle Game
+# Hero's Journey
 
 ## Group information
 - **Group Number**: 15
