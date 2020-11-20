@@ -1,4 +1,4 @@
 Rectangles with a cross are doors.
-Red doors are locked and Green doors and open/unlocked.
-You can only walk through green doors.
-Red rectangles with a star are pressure plates. You can unlock a red door by activating a pressure plate.
+Door are initially red, and they turn green once you open them.
+If the door does not open, it is locked. Locked doors can only be unlocked by activating pressure plates.
+(Red rectangles with a star are pressure plates)

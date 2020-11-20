@@ -49,7 +49,11 @@ wall 1 21 19
 wall 1 21 20
 infotile level5/level5info.txt 1 14
 wintile 17 16
-infotile level5/plottwist.txt 20 16
+infotile level5/plottwist.txt 20 17
+door 21 16
+door 21 15
+zombie 22 13
+zombie 22 18
 wall 1 6 1
 wall 1 6 2
 wall 0 6 3
