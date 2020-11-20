@@ -1,8 +1,13 @@
 Level 1: Tutorial
 Welcome to the Demon King's Dungeon!
+
 There are 5 levels in the dungeon and each level has its unique challenges.
 You will also encounter some monsters.
 Your goal is to defeat the Demon King at the end.
 
 Level 1 (this level) will be a tutorial which helps you understand different objects and monsters in the dungeon.
 Let's start by walking to the first room!
+
+By the way, You can receive instructions by touching rectangles with a '!' (just like this one).
+
+
