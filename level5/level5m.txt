@@ -1,10 +1,9 @@
 map 31 31
 player Hero 1 13
-camera 14
+camera 15
 link
 pressureplate 29 29
 door 24 14
-
 zombie 1 1
 zombie 29 20
 zombie 8 10
@@ -183,7 +182,7 @@ wall 0 3 21
 wall 0 4 21
 wall 0 5 21
 wall 0 6 21
-wall 0 7 21
+door 7 21
 door 8 21
 wall 1 9 21
 wall 1 24 21
@@ -242,9 +241,9 @@ rock 3 23
 rock 6 25
 rock 5 26
 rock 4 28
-
 wall 1 21 2
+link
+pressureplate 5 1
 door 21 1
 wall 0 28 9
 door 29 9
-
