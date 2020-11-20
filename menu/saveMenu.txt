@@ -1,7 +1,7 @@
 30 12
 Save Menu
 0: empty!
-1: empty!
+1: exists!
 2: empty!
 3: empty!
 4: empty!

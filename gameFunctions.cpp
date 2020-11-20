@@ -31,22 +31,18 @@ void game_func::detectGameControls(Player *p, Point &pos) {
   // the switch statement defines the changes of pos according to input.
   // If invalid input, a different invalid value is set.
   switch (input) {
-    case 'W':
     case 'w': {
       --pos.y; //above player
       break;
     }
-    case 'A':
     case 'a': {
       --pos.x; //left to player
       break;
     }
-    case 'S':
     case 's': {
       ++pos.y; //below player
       break;
     }
-    case 'D':
     case 'd': {
       ++pos.x; //right to player
       break;
@@ -78,6 +74,7 @@ void game_func::drawUI(Player* player) {
   player->printHP();
   player->printXY();
   std::cout << "Press H/h for the game menu\n";
+  std::cout << "Press w to go up, a to go left, s to go down, d to go right\n";
 }
 // This draws the different menus of the game defined by the txt address of the menus,
 // which is stored by the parameter address.
