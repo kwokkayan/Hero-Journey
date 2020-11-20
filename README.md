@@ -22,8 +22,9 @@ The Hero enters the Demon King's lair and must complete the trials to reach the 
 - When the player's health points drop to zero, the game reverts to the main menu. 
 - The player can only "kill" the final boss and must use the environment to his advantage for his defence.
 ### Default controls
-- W, A, S and D for movement
-- H for help menu (for restarting, save/load, quit game and return to main menu)
+- w, a, s and d for movement (only lowercase)
+- H/h for game menu (for restarting, save/load, quit game and return to main menu)
+- In all menus, the controls are printed at the left. Both uppercase and lowercase input will work!
 ## Features to implement
 This section shall cover the features, catergorized by the **code requirement** items 1 to 5, and others
 ### Generation of random game sets or events
