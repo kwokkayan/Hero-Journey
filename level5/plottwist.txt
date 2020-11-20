@@ -1,6 +1,10 @@
 Surprisingly, you saw nothing in the Demon King's room.
-It turned out that each of the portals in previous levels is one of the Demon King's hearts. By winning the 4 levels and going through the 4 portals,  you destroyed all its 4 hearts. Now he has already died and vanished.
-Anyway, CONGRATULATIONS! You conquered the dungeon and defeated the Demon King!
+It turned out that each of the portals in previous levels is one of the Demon King's hearts. 
+By winning the 4 levels and going through the 4 portals,  
+you destroyed all its 4 hearts. 
+Now he has already died and vanished.
+Anyway, CONGRATULATIONS! 
+You conquered the dungeon and defeated the Demon King!
 
 (THE END)
 
