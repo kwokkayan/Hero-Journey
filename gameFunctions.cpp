@@ -585,8 +585,7 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
         returnMainMenu = true;
         break;
       } else if (currentlevel == 5) {
-        //print final cutscreen
-        game_func::printWinScreen();
+        game_func::printCutScene(6);
         returnMainMenu = true;
         break;
       } else {
@@ -953,7 +952,10 @@ void game_func::printCutScene(int num) {
   } else {
     std::cout << "cutscene " << num << " not created yet!";
   }
-  std::cout << "\nPress any button to start...";
+  if (num == 6)
+    std::cout <<"\nPress any button to return to main menu...";
+  else
+    std::cout << "\nPress any button to start...";
   char temp = game_func::getKeystroke();
   inFile.close();
 }
