@@ -1,6 +1,7 @@
 # Untitled Role-playing Puzzle Game
 
-## Group members information
+## Group information
+- **Group Number**: 15
 - **Name**: Kwok Ka Yan    **UID**: 3035705336
 - **Name**: Choi Tsz Long  **UID**: 3035705154
 
