@@ -565,27 +565,27 @@ void game_func::readScriptLevel(std::string levelFile, Map &map, WinTile *&winti
 //     8.2 Mob moves and the gamestate is updated
 //   9. The console is cleared for the next iteration
 void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mobQueue, Player *&player, Camera *&camera, bool &isStoryMode, bool &returnMainMenu) {
-  Point newP = Point();
-  //initial load here
-  int currentlevel = 1; //for storymode
-  bool hasQuitted = false;
-  bool noUpdate = false;
-  int currentHealth = player->hp;
+  Point newP = Point(); // For storing the position of player after moving. (-1, -1) for invalid input. (-2, -2) for opening menu.
+  int currentlevel = 1; // For storing current level in story mode
+  bool hasQuitted = false; // For storing whether the player decided to quit the game
+  bool noUpdate = false; // When game is saved/loaded, no need to update the game state.
+  int currentHealth = player->hp; // When level is changed in story mode, player hp is carried over.
 
-  game_func::save("saves/autosave.txt", map, camera);
+  game_func::save("saves/autosave.txt", map, camera); // Game is saved for restarting
   while (true) {
+    // Drawing UI and the level
     game_func::drawUI(player);
     camera->draw(map);
-    if (wintile->hasWon) { //Wining condition
+    if (wintile->hasWon) { // Wining condition
       if (!isStoryMode) {
         game_func::printWinScreen();
         returnMainMenu = true;
         break;
-      } else if (currentlevel == 5) {
+      } else if (currentlevel == 5) { // After the last level in story mode
         game_func::printCutScene(6);
         returnMainMenu = true;
         break;
-      } else {
+      } else { // After non-last level in story mode, go to the next level
         ++currentlevel;
         std::string currlevelFile = "level" + std::to_string(currentlevel) + "/level" + std::to_string(currentlevel) + "m.txt";
         game_func::clearObjects(map, mobQueue, camera);
@@ -602,7 +602,7 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
       break;
     }
 
-    game_func::detectGameControls(player, newP);
+    game_func::detectGameControls(player, newP); // geting player input and storing in newP
     if (newP.equalsTo(-2, -2)) { // Opening the menu
       game_func::drawMenu("menu/menu.txt");
       game_func::menuFunctions selection;
@@ -672,20 +672,26 @@ void game_func::gameLoop(Map &map, WinTile *&wintile, std::vector<Moveable*> &mo
       camera->camera_pos = player->pos;
       map.updateMap(player->pos, 3);
     }
+    // This is the loop for processing the mobQueue.
+    // Each mob moves and the level is manipulated.
     for (std::vector<Moveable*>::iterator it = mobQueue.begin(); it != mobQueue.end(); it++) {
-      if ((*it)->destroyFlag) {
+      if ((*it)->destroyFlag) { // When the mob is to be removed
         Object *target = map.removeObject((*it)->pos);
-        if (target->id != (*it)->id) {
+        // If the top object is not the mob, set the second object as the delete target
+        if (target->id != (*it)->id) { 
           Object *realTarget = map.removeObject((*it)->pos);
-          map.insertObject(target);
+          map.insertObject(target); // Replace the top object
           target = realTarget;
         }
+        // Removing the target
         mobQueue.erase(it);
         delete target;
         break;
       }
+      // Move each mob and detect whether it can deal damage to the player.
       (*it)->move(map);
       (*it)->dealDmg(player);
+      // Update the map and the currentHealth of player, so to carry over to the next level
       map.updateMap((*it)->pos, 3);
       currentHealth = player->hp;
     }
@@ -717,9 +723,8 @@ void game_func::save(std::string address, Map map, Camera *c) {
         }
         while (stack.size() > 0) {
           Object *o = stack.pop();
-          switch (o->id) {
+          switch (o->id) { // Switch case for saving.
             case ObjectId::VOID: {
-              //Void *v = static_cast<Void*>(o);
               outFile << static_cast<int>(o->id) << '\n';
               break;
             }
