@@ -4,7 +4,8 @@
 - **Group Number**: 15
 - **Name**: Kwok Ka Yan    **UID**: 3035705336
 - **Name**: Choi Tsz Long  **UID**: 3035705154
-
+## OS Environment
+- Runs Natively on X2Go HKU Linux Servers!
 ## Game description
 Genre: role-playing and puzzle 
 - The player solves a series of puzzles, finally reaching the boss room where the final battle takes place. 
